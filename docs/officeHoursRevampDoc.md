@@ -1,9 +1,9 @@
-# Office Hours Visibility Revamp
+# **Office Hours Visibility Revamp**
 
 0. Title & Team
 
    -  Office Hours Visibility Revamp
-   -  Christopher Sáez, Michael Tyndall, Ethan Byrd, Ian Bracken
+   -  `Christopher Sáez`, `Michael Tyndall`, `Ethan Byrd`, `Ian Bracken`
 
 1. Overview
 
@@ -41,14 +41,31 @@
 4. Wireframes / Mockups
 
    -  Landing page: add a convenient calendar for future office hours.
-      -  picture
-      -  ![image](../images/officeHourRevampedScreenshots/calendar.png)
-      -  ![image](docs/images/officeHourRevampScreenshots/calendar.png)
+
+   `Student View`
+   ![image](/docs/images/student-view-calendar.png)
+
+   `More Info Page`
+   ![image](/docs/images/calendar-more-info.png)
+
+   `TA View`
+   ![image](/docs/images/ta-view-calendar.png)
+
+   `Professor View`
+   ![image](/docs/images/prof-view-calendar.png)
+
    -  TA scheduling form: add new features such as repeating office hours, title, name display.
-      -  pictures
+
+   `TA Event Creator`
+   ![image](/docs/images/ta-view-event-creator.png)
+
+   `TA Event Creator Recurring`
+   ![image](/docs/images/ta-view-event-creator-recurring.png)
+
    -  Office hour edit form: add new features from the initial sceduling form.
 
-      -  picture
+   `TA Event Updater`
+   ![image](/docs/images/ta-view-event-scheduling.png)
 
    -  Stretch goal: In the future we may create a wait-time estimate display, a display for students to see who else is scheduled to go to office hours, and a feature to book office hours in advance.
 
