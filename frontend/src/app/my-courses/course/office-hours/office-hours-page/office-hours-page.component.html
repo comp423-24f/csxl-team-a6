@@ -68,12 +68,14 @@
             mat-table
             [dataSource]="futureOfficeHourEventsPage()?.items ?? []">
             <ng-container matColumnDef="monday">
-              <th mat-header-cell *matHeaderCellDef>Monday</th>
-                <td mat-cell *matCellDef="let element">
+              <th mat-header-cell *matHeaderCellDef >
+                {{ getDay(1) }}
+              </th>
+              <td mat-cell *matCellDef="let element">
                 {{ element.start_time | date: 'EEEE, M/d' }}<br />
-                {{ element.start_time | date: 'shortTime' }} -
+                {{ element.start_time | date: 'shortTime' }} 
                 {{ element.end_time | date: 'shortTime' }}
-                </td>
+              </td>
             </ng-container>
             <ng-container matColumnDef="tuesday">
               <th mat-header-cell *matHeaderCellDef>Tuesday</th>

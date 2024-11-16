@@ -73,6 +73,7 @@ export class OfficeHoursPageComponent {
   public pastOhDisplayedColumns: string[] = ['date', 'type'];
 
   courseSiteId: string;
+  new: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -135,6 +136,13 @@ export class OfficeHoursPageComponent {
         ];
       }
     });
+  }
+
+  getDay(day: number) {
+    const today = new Date();
+    const newDay = new Date();
+    newDay.setDate(today.getDay() + day);
+    return newDay.getMonth + '/' + newDay.getDay;
   }
 
   /** Handles a pagination event for the future office hours table */

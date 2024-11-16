@@ -53,6 +53,7 @@ export class MyCoursesService {
   currentTerms = computed(() => {
     return this.termsSignal().filter((term) => {
       let currentDate = new Date();
+      console.log(currentDate.getDay);
       return currentDate <= term.end;
     });
   });
@@ -112,9 +113,9 @@ export class MyCoursesService {
     courseSiteId: string
   ): Observable<OfficeHourEventOverview[]> {
     return this.http
-      .get<OfficeHourEventOverviewJson[]>(
-        `/api/my-courses/${courseSiteId}/oh-events/current`
-      )
+      .get<
+        OfficeHourEventOverviewJson[]
+      >(`/api/my-courses/${courseSiteId}/oh-events/current`)
       .pipe(map(parseOfficeHourEventOverviewJsonList));
   }
 
