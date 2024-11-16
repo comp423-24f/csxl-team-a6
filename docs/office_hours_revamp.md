@@ -75,8 +75,11 @@
 1.  What specific areas of the existing code base will you directly depend upon, extend, or integrate with?
 
     - /workspace/frontend/src/app/my-courses/course/office-hours/office-hours-editor/office-hours-editor.component.html
+      - This is where the Office Hours Editor Form is for TAs/Professors
     - /workspace/frontend/src/app/my-courses/course/office-hours/office-hours-page/office-hours-page.component.html
+      - Main office hours viewpoint, most of our work will be done in here for the calendar.
     - /workspace/frontend/src/app/my-courses/course/office-hours/office-hours-queue/office-hours-queue.component.html
+      - Queue for students to be helped during an office hours event
     - /workspace/backend/api/office_hours/office_hours.py
     - /workspace/backend/entities/office_hours/office_hours_entity.py
     - /workspace/backend/models/office_hours/office_hours.py
