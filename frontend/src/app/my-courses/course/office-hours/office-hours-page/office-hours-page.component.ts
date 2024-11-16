@@ -54,7 +54,13 @@ export class OfficeHoursPageComponent {
   private previousFutureOfficeHourEventParams: PaginationParams =
     DEFAULT_PAGINATION_PARAMS;
 
-  public futureOhDisplayedColumns: string[] = ['date', 'type'];
+  public futureOhDisplayedColumns: string[] = [
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday'
+  ];
 
   /** Encapsulated past events paginator and params */
   private pastOfficeHourEventsPaginator: Paginator<OfficeHourEventOverview>;
@@ -120,7 +126,13 @@ export class OfficeHoursPageComponent {
         .flatMap((term) => term.sites)
         .find((site) => site.id == +this.courseSiteId);
       if (courseSite?.role !== 'Student') {
-        this.futureOhDisplayedColumns = ['date', 'type', 'actions'];
+        this.futureOhDisplayedColumns = [
+          'monday',
+          'tuesday',
+          'wednesday',
+          'thursday',
+          'friday'
+        ];
       }
     });
   }
