@@ -138,6 +138,10 @@ export class OfficeHoursPageComponent {
     });
   }
 
+  logElement(element: any): void {
+    console.log('Element data:', element);
+  }
+
   getDay(day: number) {
     const today = new Date();
     const newDay = new Date();

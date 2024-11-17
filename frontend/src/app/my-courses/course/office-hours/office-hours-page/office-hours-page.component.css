@@ -50,3 +50,21 @@
 .semibold {
     font-weight: 500;
 }
+
+.calendar-event-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px;
+    margin: 8px 0;
+    border: 1px solid #ccc; /* Subtle border for separation */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background for readability */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    font-family: Arial, sans-serif; /* Clean and modern font */
+    font-size: 14px; /* Standard font size */
+    color: #333; /* Neutral text color */
+    max-width: 600px; /* Restrict the width for better readability */
+  }
+  
