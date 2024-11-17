@@ -141,8 +141,32 @@ export class OfficeHoursPageComponent {
   getDay(day: number) {
     const today = new Date();
     const newDay = new Date();
-    newDay.setDate(today.getDay() + day);
-    return newDay.getMonth + '/' + newDay.getDay;
+
+    if (today.getDay() === 6) {
+      // Saturday
+      newDay.setDate(today.getDate() + 2); // Skip to Monday
+    } else if (today.getDay() === 0) {
+      // Sunday
+      newDay.setDate(today.getDate() + 1); // Skip to Monday
+    } else {
+      newDay.setDate(today.getDate()); // Start from today if it's a weekday
+    }
+    newDay.setDate(newDay.getDate() + day);
+
+    const daysOfWeek = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ];
+    const dayName = daysOfWeek[newDay.getDay()];
+
+    const month = newDay.getMonth() + 1;
+    const date = newDay.getDate();
+    return `${dayName} ${month}/${date}`;
   }
 
   /** Handles a pagination event for the future office hours table */
