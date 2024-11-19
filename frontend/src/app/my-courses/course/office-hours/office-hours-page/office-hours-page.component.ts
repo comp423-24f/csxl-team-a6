@@ -142,21 +142,7 @@ export class OfficeHoursPageComponent {
     console.log('Element data:', element);
   }
 
-  getDay(day: number) {
-    const today = new Date();
-    const newDay = new Date();
-
-    if (today.getDay() === 6) {
-      // Saturday
-      newDay.setDate(today.getDate() + 2); // Skip to Monday
-    } else if (today.getDay() === 0) {
-      // Sunday
-      newDay.setDate(today.getDate() + 1); // Skip to Monday
-    } else {
-      newDay.setDate(today.getDate()); // Start from today if it's a weekday
-    }
-    newDay.setDate(newDay.getDate() + day);
-
+  getDay(date: string, day: number) {
     const daysOfWeek = [
       'Sunday',
       'Monday',
@@ -166,11 +152,64 @@ export class OfficeHoursPageComponent {
       'Friday',
       'Saturday'
     ];
-    const dayName = daysOfWeek[newDay.getDay()];
+    const dayName = daysOfWeek[day];
+    return `${dayName} ${date}`;
+  }
 
-    const month = newDay.getMonth() + 1;
-    const date = newDay.getDate();
-    return `${dayName} ${month}/${date}`;
+  availableWeeks: string[] = [];
+  selectedWeek: string | null = null;
+  calendarDates: string[] = [];
+
+  ngOnInit() {
+    this.generateAvailableWeeks();
+    this.selectedWeek = this.availableWeeks[0];
+    this.updateCalendarForWeek(0);
+  }
+
+  generateAvailableWeeks() {
+    const startDate = this.getMonday(new Date());
+    for (let i = 0; i < 4; i++) {
+      const weekStart = new Date(startDate);
+      weekStart.setDate(startDate.getDate() + i * 7);
+      const weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekStart.getDate() + 4);
+      const formattedWeek = `${this.formatDate(weekStart)} - ${this.formatDate(weekEnd)}`;
+      this.availableWeeks[i] = formattedWeek;
+    }
+  }
+
+  getMonday(date: Date) {
+    const day = date.getDay();
+    const diffToMonday = day === 0 ? 0 : 1 - day;
+    date.setDate(date.getDate() + diffToMonday);
+    return date;
+  }
+
+  formatDate(date: Date) {
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${month}/${day}`;
+  }
+
+  onWeekChange(selected: string) {
+    console.log('Week changed to: ', selected);
+    this.selectedWeek = selected;
+    const selectedIndex = this.availableWeeks.indexOf(selected);
+    this.updateCalendarForWeek(selectedIndex);
+    console.log(this.calendarDates[0]);
+  }
+
+  updateCalendarForWeek(weekIndex: number) {
+    const startDate = this.getMonday(new Date());
+    startDate.setDate(startDate.getDate() + weekIndex * 7);
+    const newDates: string[] = [];
+    for (let i = 0; i < 5; i++) {
+      const newDate = new Date(startDate);
+      newDate.setDate(startDate.getDate() + i);
+      newDates.push(this.formatDate(newDate));
+    }
+    console.log('new dates: ', newDates);
+    this.calendarDates = [...newDates];
   }
 
   /** Handles a pagination event for the future office hours table */

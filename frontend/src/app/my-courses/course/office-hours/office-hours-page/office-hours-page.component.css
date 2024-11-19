@@ -65,3 +65,8 @@
 .right-content{
     text-align: right;
 }
+
+.week-dropdown .mat-select-panel {
+    top: 100% !important; 
+    bottom: auto !important; 
+  }
