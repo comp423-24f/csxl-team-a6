@@ -66,7 +66,35 @@
     text-align: right;
 }
 
+.week-dropdown .mat-select-trigger {
+    position: relative;
+  }
+
 .week-dropdown .mat-select-panel {
     top: 100% !important; 
     bottom: auto !important; 
+    z-index: 1000 !important; 
+  }
+
+.week-dropdown-container {
+  width: 200px;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+.calendar-icon {
+    font-size: 20px; 
+    margin-right: 8px; 
+    vertical-align: middle; 
+  }
+
+  .mat-form-field {
+    min-width: auto; 
+    margin: 0; 
+  }
+
+  .week-dropdown .mat-option {
+    font-size: 10px;
   }

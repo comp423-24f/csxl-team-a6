@@ -64,9 +64,12 @@
     <mat-card class="schedule-card" appearance="outlined">
       <mat-card-content class="schedule-card-content">
         <div class="table-responsive">
-          <mat-form-field appearance="fill">
-            <mat-label>Select Week</mat-label>
+          <mat-form-field appearance="outline" class="week-dropdown-container">
             <mat-select [(ngModel)]="selectedWeek" (selectionChange)="onWeekChange($event.value)" panelClass = "week-dropdown">
+              <mat-select-trigger>
+                <mat-icon class="calendar-icon">calendar_today</mat-icon>
+                <span>{{ selectedWeek || 'Select Week' }}</span>
+              </mat-select-trigger>
               @for (week of availableWeeks; track week) {
                 <mat-option [value]="week">{{ week }}</mat-option>
               }
