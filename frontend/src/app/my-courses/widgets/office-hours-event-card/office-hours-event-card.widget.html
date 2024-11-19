@@ -1,0 +1,20 @@
+<mat-card class="surface-container-card" appearance="outlined">
+    <mat-card-content class="schedule-card-content">
+      <div class = "semibold-title">
+        {{ event.type }}<br />
+      </div>
+      TA Name
+      <div class="right-content">
+        {{ event.location }} <br />
+        {{ event.start_time | date: 'shortTime' }} -
+        {{ event.end_time | date: 'shortTime' }}<br />
+      </div>
+      <!-- Useful button for testing data coming in -->
+    <!-- <button (click)="logElement(element)">Log Element</button> -->
+    <!-- Lacking functionality -->
+      <div class="right-content-buttons">
+        <button mat-stroked-button>More info</button>
+        <button mat-flat-button class = "primary-button">Book</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
