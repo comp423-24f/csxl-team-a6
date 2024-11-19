@@ -88,6 +88,7 @@ export interface CourseRosterOverview {
 
 export interface OfficeHourEventOverviewJson {
   id: number;
+  hosts: string;
   type: string;
   mode: string;
   description: string;
@@ -101,6 +102,7 @@ export interface OfficeHourEventOverviewJson {
 
 export interface OfficeHourEventOverview {
   id: number;
+  hosts: string;
   type: string;
   mode: string;
   description: string;

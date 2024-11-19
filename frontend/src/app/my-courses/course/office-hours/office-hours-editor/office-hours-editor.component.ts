@@ -84,6 +84,7 @@ export class OfficeHoursEditorComponent {
   /** Office Hours Editor Form */
   public officeHoursForm = this.formBuilder.group(
     {
+      hosts: new FormControl(''),
       type: new FormControl(0, [Validators.required]),
       mode: new FormControl(0, [Validators.required]),
       description: new FormControl(''),
