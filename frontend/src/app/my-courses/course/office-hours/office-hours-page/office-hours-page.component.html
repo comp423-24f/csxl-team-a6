@@ -3,20 +3,13 @@
     <div class="header-horizontal-container">
       <mat-card-title>Office Hours</mat-card-title>
       @if(myCoursesService.courseOverview(+courseSiteId)?.role !== 'Student') {
-      <button
-        mat-flat-button
-        class="create-event-button"
-        color="primary"
-        routerLink="new/edit">
+      <button mat-flat-button class="create-event-button" color="primary" routerLink="new/edit">
         Create Event
       </button>
       }
     </div>
     <div class="header-horizontal-container low-button-toggle-density">
-      <mat-button-toggle-group
-        [(ngModel)]="viewState"
-        name="view"
-        class="view-toggle">
+      <mat-button-toggle-group [(ngModel)]="viewState" name="view" class="view-toggle">
         <mat-button-toggle [value]="ViewState.Scheduled">
           Scheduled
         </mat-button-toggle>
@@ -32,7 +25,7 @@
 
   <!-- We may want to include the following buttons within the additional info section of the office hours event within the calendar -->
 
-    <!-- <button mat-icon-button [routerLink]="element.id + '/edit'">
+  <!-- <button mat-icon-button [routerLink]="element.id + '/edit'">
     <mat-icon>edit</mat-icon>
   </button>
   <button mat-icon-button (click)="deleteOfficeHours(element)">
@@ -53,9 +46,7 @@
       @if (currentOfficeHourEvents().length === 0) {
       <p>Office hours are currently closed.</p>
       } @for (event of currentOfficeHourEvents(); track event.id) {
-      <office-hour-event-card
-        [event]="event"
-        [editRoute]="event.id + '/edit'" />
+      <office-hour-event-card [event]="event" [editRoute]="event.id + '/edit'" />
       }
     </div>
     <mat-card-subtitle class="schedule-header">
@@ -65,99 +56,66 @@
       <mat-card-content class="schedule-card-content">
         <div class="table-responsive">
           <mat-form-field appearance="outline" class="week-dropdown-container">
-            <mat-select [(ngModel)]="selectedWeek" (selectionChange)="onWeekChange($event.value)" panelClass = "week-dropdown">
+            <mat-select [(ngModel)]="selectedWeek" (selectionChange)="onWeekChange($event.value)"
+              panelClass="week-dropdown">
               <mat-select-trigger>
                 <mat-icon class="calendar-icon">calendar_today</mat-icon>
                 <span>{{ selectedWeek || 'Select Week' }}</span>
               </mat-select-trigger>
               @for (week of availableWeeks; track week) {
-                <mat-option [value]="week">{{ week }}</mat-option>
+              <mat-option [value]="week">{{ week }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
-          
-          <table
-            mat-table
-            [dataSource]="futureOfficeHourEventsPage()?.items ?? []">
+          <div #fiveDayCalendar>
+            <div #monday>
+              <mat-card-subtitle>{{ getDay(calendarDates[0], 1) }}</mat-card-subtitle>
+              @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+              @if (isSameDayExtreme(event, calendarDates[0])) {
+              <future-office-hours-card [event]="event" [shouldDisplay]="true">
+              </future-office-hours-card>
+              }
+              }
+            </div>
+            <div #tuesday>
+              <mat-card-subtitle>{{ getDay(calendarDates[1], 2) }}</mat-card-subtitle>
+              @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+              @if (isSameDayExtreme(event, calendarDates[1])) {
+              <future-office-hours-card [event]="event" [shouldDisplay]="true">
+              </future-office-hours-card>
+              }
+              }
+            </div>
+            <div #wednesday>
+              <mat-card-subtitle>{{ getDay(calendarDates[2], 3) }}</mat-card-subtitle>
+              @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+              @if (isSameDayExtreme(event, calendarDates[2])) {
+              <future-office-hours-card [event]="event" [shouldDisplay]="true">
+              </future-office-hours-card>
+              }
+              }
+            </div>
+            <div #thursday>
+              <mat-card-subtitle>{{ getDay(calendarDates[3], 4) }}</mat-card-subtitle>
+              @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+              @if (isSameDayExtreme(event, calendarDates[3])) {
+              <future-office-hours-card [event]="event" [shouldDisplay]="true">
+              </future-office-hours-card>
+              }
+              }
+            </div>
+            <div #friday>
+              <mat-card-subtitle>{{ getDay(calendarDates[4], 5) }}</mat-card-subtitle>
+              @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+              @if (isSameDayExtreme(event, calendarDates[4])) {
+              <future-office-hours-card [event]="event" [shouldDisplay]="true">
+              </future-office-hours-card>
+              }
+              }
+            </div>
+          </div>
 
-            <ng-container matColumnDef="monday">
-              <th mat-header-cell *matHeaderCellDef >
-                {{ getDay(calendarDates[0], 1) }}
-              </th>
-              <td mat-cell *matCellDef="let eventOH">
-                @if (isSameDay(eventOH, 1)) {
-                  <future-office-hours-card
-                    [event]="eventOH"
-                    [shouldDisplay]="true">
-                  </future-office-hours-card>
-                }
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="tuesday">
-              <th mat-header-cell *matHeaderCellDef>
-                {{ getDay(calendarDates[1], 2) }}
-              </th>
-              <td mat-cell *matCellDef="let eventOH">
-                @if (isSameDay(eventOH, 2)) {
-                  <future-office-hours-card
-                    [event]="eventOH"
-                    [shouldDisplay]="true">
-                  </future-office-hours-card>
-                }
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="wednesday">
-              <th mat-header-cell *matHeaderCellDef>
-                {{ getDay(calendarDates[2], 3) }}
-              </th>
-              <td mat-cell *matCellDef="let eventOH">
-                @if (isSameDay(eventOH, 3)) {
-                  <future-office-hours-card
-                    [event]="eventOH"
-                    [shouldDisplay]="true">
-                  </future-office-hours-card>
-                }
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="thursday">
-              <th mat-header-cell *matHeaderCellDef>
-                {{ getDay(calendarDates[3], 4) }}
-              </th>
-              <td mat-cell *matCellDef="let eventOH">
-                @if (isSameDay(eventOH, 4)) {
-                  <future-office-hours-card
-                    [event]="eventOH"
-                    [shouldDisplay]="true">
-                  </future-office-hours-card>
-                }
-              </td>
-              
-            </ng-container>
-
-            <ng-container matColumnDef="friday">
-              <th mat-header-cell *matHeaderCellDef>
-                {{ getDay(calendarDates[4], 5) }}
-              </th>
-              <td mat-cell *matCellDef="let eventOH">
-                @if (isSameDay(eventOH, 5)) {
-                  <future-office-hours-card
-                    [event]="eventOH"
-                    [shouldDisplay]="true">
-                  </future-office-hours-card>
-                }
-              </td>
-            </ng-container>  
-            
-            <tr mat-header-row *matHeaderRowDef="futureOhDisplayedColumns"></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: futureOhDisplayedColumns"></tr>
-          </table>
-          <mat-paginator
-            [length]="futureOfficeHourEventsPage()?.length ?? 0"
+          <mat-paginator [length]="futureOfficeHourEventsPage()?.length ?? 0"
             [pageSize]="futureOfficeHourEventsPage()?.params?.page_size ?? 0"
             [pageIndex]="futureOfficeHourEventsPage()?.params?.page ?? 0"
             (page)="handleFutureOfficeHoursPageEvent($event)"></mat-paginator>
@@ -172,9 +130,7 @@
     <mat-card class="schedule-card" appearance="outlined">
       <mat-card-content class="schedule-card-content">
         <div class="table-responsive">
-          <table
-            mat-table
-            [dataSource]="pastOfficeHourEventsPage()?.items ?? []">
+          <table mat-table [dataSource]="pastOfficeHourEventsPage()?.items ?? []">
             <!-- Columns under Future Schedule which we will delete and replace -- NOTE THAT THIS CORRESPONDS TO HISTORY TAB NOT SCHEULED -->
             <!-- <ng-container matColumnDef="date">
               <th mat-header-cell *matHeaderCellDef>Date</th>
@@ -193,12 +149,9 @@
               </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="pastOhDisplayedColumns"></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: pastOhDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: pastOhDisplayedColumns"></tr>
           </table>
-          <mat-paginator
-            [length]="pastOfficeHourEventsPage()?.length ?? 0"
+          <mat-paginator [length]="pastOfficeHourEventsPage()?.length ?? 0"
             [pageSize]="pastOfficeHourEventsPage()?.params?.page_size ?? 0"
             [pageIndex]="pastOfficeHourEventsPage()?.params?.page ?? 0"
             (page)="handlePastOfficeHoursPageEvent($event)"></mat-paginator>

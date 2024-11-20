@@ -161,8 +161,20 @@ export class OfficeHoursPageComponent {
   // }
 
   isSameDay(event: OfficeHourEventOverview, dayNum: number): boolean {
-    console.log(event.start_time.getDay() == dayNum);
+    // console.log(event.start_time.getDay() == dayNum);
+    // console.log(event.start_time.getDay());
     return event.start_time.getDay() == dayNum;
+  }
+
+  isSameDayExtreme(event: OfficeHourEventOverview, date: string) {
+    let monthDay = date.split('/');
+    let eventMonth = event.start_time.getMonth() + 1;
+    if (eventMonth.toString() == monthDay[0]) {
+      if (event.start_time.getDate().toString() == monthDay[1]) {
+        return true;
+      }
+    }
+    return false;
   }
 
   getDay(date: string, day: number) {
