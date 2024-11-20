@@ -321,6 +321,7 @@ class OfficeHoursService:
         self._check_site_permissions(user, site_id)
 
         # Update
+        office_hours_entity.hosts = event.hosts
         office_hours_entity.type = event.type
         office_hours_entity.mode = event.mode
         office_hours_entity.description = event.description

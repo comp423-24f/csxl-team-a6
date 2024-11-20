@@ -1,0 +1,34 @@
+::ng-deep .future-office-hours-card{
+    max-width: 300px !important;
+    margin: 0px !important;
+}
+
+/* Style for the mat-card with the 'surface-container-card' class */
+.surface-container-card {
+    max-width: 100% !important;
+    margin-right: 32px !important;
+}
+
+/* Style for mat-card-content with the 'schedule-card-content' class */
+.schedule-card-content {
+padding-top: 0;
+}
+
+/* Style for the title within the widget */
+.semibold-title {
+font-weight: 500;
+margin-top: 8px;
+}
+
+/* Style for the right-aligned content */
+.right-content {
+text-align: right;
+}
+
+/* Style for the buttons container */
+.right-content-buttons {
+margin-top: 16px;
+display: flex;
+gap: 16px;
+justify-content: flex-end;
+}

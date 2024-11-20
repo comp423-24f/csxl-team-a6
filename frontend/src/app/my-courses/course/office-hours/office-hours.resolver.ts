@@ -23,6 +23,7 @@ export const officeHoursResolver: ResolveFn<OfficeHours | undefined> = (
     return {
       id: -1,
       type: 0,
+      hosts: '',
       mode: 0,
       description: '',
       location_description: '',
