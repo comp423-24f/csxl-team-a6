@@ -39,6 +39,9 @@ class OfficeHoursEntity(EntityBase):
         SQLAlchemyEnum(OfficeHoursEventType), nullable=False
     )
 
+    # Hosts of event
+    hosts: Mapped[str] = mapped_column(String, default="", nullable=False)
+
     # Mode of event
     mode: Mapped[OfficeHoursEventModeType] = mapped_column(
         SQLAlchemyEnum(OfficeHoursEventModeType), nullable=False

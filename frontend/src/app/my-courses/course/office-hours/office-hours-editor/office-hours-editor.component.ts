@@ -152,6 +152,7 @@ export class OfficeHoursEditorComponent {
    */
   onSubmit(): void {
     if (this.officeHoursForm.valid) {
+      console.log('Form is valid');
       let officeHoursToSubmit = this.officeHours;
       Object.assign(officeHoursToSubmit, this.officeHoursForm.value);
 
@@ -173,6 +174,8 @@ export class OfficeHoursEditorComponent {
         next: (officeHours) => this.onSuccess(officeHours),
         error: (err) => this.onError(err)
       });
+    } else {
+      console.log('Form is not valid');
     }
   }
 

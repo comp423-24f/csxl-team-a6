@@ -40,6 +40,7 @@ class NewOfficeHours(BaseModel):
     """
 
     type: OfficeHoursEventType
+    hosts: str
     mode: OfficeHoursEventModeType
     description: str
     location_description: str
