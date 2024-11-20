@@ -68,10 +68,26 @@
             </mat-select>
           </mat-form-field>
           <div #fiveDayCalendar>
-            <mat-grid-list cols="5">
+            <mat-grid-list cols="5" rowHeight="50px" class="calendar-dates">
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[0], 1) }}</mat-card-subtitle>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[1], 2) }}</mat-card-subtitle>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[2], 3) }}</mat-card-subtitle>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[3], 4) }}</mat-card-subtitle>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[4], 5) }}</mat-card-subtitle>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="5" rowHeight="500px" class="calendar-grid">
               <mat-grid-tile>
                 <div #monday>
-                  <mat-card-subtitle>{{ getDay(calendarDates[0], 1) }}</mat-card-subtitle>
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[0])) {
                   <future-office-hours-card [event]="event" [shouldDisplay]="true">
@@ -82,7 +98,6 @@
               </mat-grid-tile>
               <mat-grid-tile>
                 <div #tuesday>
-                  <mat-card-subtitle>{{ getDay(calendarDates[1], 2) }}</mat-card-subtitle>
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[1])) {
                   <future-office-hours-card [event]="event" [shouldDisplay]="true">
@@ -93,7 +108,6 @@
               </mat-grid-tile>
               <mat-grid-tile>
                 <div #wednesday>
-                  <mat-card-subtitle>{{ getDay(calendarDates[2], 3) }}</mat-card-subtitle>
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[2])) {
                   <future-office-hours-card [event]="event" [shouldDisplay]="true">
@@ -104,7 +118,6 @@
               </mat-grid-tile>
               <mat-grid-tile>
                 <div #thursday>
-                  <mat-card-subtitle>{{ getDay(calendarDates[3], 4) }}</mat-card-subtitle>
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[3])) {
                   <future-office-hours-card [event]="event" [shouldDisplay]="true">
@@ -115,7 +128,6 @@
               </mat-grid-tile>
               <mat-grid-tile>
                 <div #friday>
-                  <mat-card-subtitle>{{ getDay(calendarDates[4], 5) }}</mat-card-subtitle>
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[4])) {
                   <future-office-hours-card [event]="event" [shouldDisplay]="true">

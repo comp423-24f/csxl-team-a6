@@ -98,3 +98,16 @@
   .week-dropdown .mat-option {
     font-size: 10px;
   }
+
+  /* .calendar-dates { */
+    /* justify-content: flex-start; */
+    /* padding-bottom: calc(10% - 0.8px) !important; */
+    /* left: 0px; */
+    /* width: calc(20% - 0.8px) !important; */
+    /* margin-top: 0px; */
+    /* padding-top: calc(2% - 0.8px) !important; */
+  /* } */
+
+  .calendar-grid {
+    justify-content: flex-start;
+  }
