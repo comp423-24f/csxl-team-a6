@@ -142,6 +142,29 @@ export class OfficeHoursPageComponent {
     console.log('Element data:', element);
   }
 
+  logWeirdList() {
+    console.log(this.futureOfficeHourEventsPage()?.items ?? []);
+  }
+
+  // NOTE: this may be useful in the future
+  // @param = number corresponding to day of the week
+  // @return = list of OH cards that are on that day
+  // getFilteredFutureEvents(dayNum: number): OfficeHourEventOverview[] {
+  //   const futureEvents: OfficeHourEventOverview[] =
+  //     this.futureOfficeHourEventsPage()?.items ?? [];
+  //   const filtered: OfficeHourEventOverview[] = futureEvents.filter(
+  //     (futureEvent) => {
+  //       return futureEvent.start_time.getDay() == dayNum;
+  //     }
+  //   );
+  //   return filtered;
+  // }
+
+  isSameDay(event: OfficeHourEventOverview, dayNum: number): boolean {
+    console.log(event.start_time.getDay() == dayNum);
+    return event.start_time.getDay() == dayNum;
+  }
+
   getDay(date: string, day: number) {
     const daysOfWeek = [
       'Sunday',

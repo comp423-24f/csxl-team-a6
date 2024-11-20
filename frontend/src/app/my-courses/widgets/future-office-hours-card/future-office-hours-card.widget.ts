@@ -10,15 +10,16 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { OfficeHourEventOverview } from '../../my-courses.model';
 
 @Component({
-  selector: 'office-hours-event-card',
-  templateUrl: './office-hours-event-card.widget.html',
-  styleUrls: ['./office-hours-event-card.widget.scss']
+  selector: 'future-office-hours-card',
+  templateUrl: './future-office-hours-card.widget.html',
+  styleUrls: ['./future-office-hours-card.widget.scss']
 })
-export class OfficeHoursEventCardComponent {
+export class FutureOfficeHoursCardWidget {
   /**
    * The office hours event data to display in the card.
    */
   @Input() event!: OfficeHourEventOverview;
+  @Input() shouldDisplay!: boolean;
 
   /**
    * Event emitted when the "More info" button is clicked.

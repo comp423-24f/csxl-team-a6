@@ -75,64 +75,71 @@
               }
             </mat-select>
           </mat-form-field>
+          
           <table
             mat-table
             [dataSource]="futureOfficeHourEventsPage()?.items ?? []">
+
             <ng-container matColumnDef="monday">
               <th mat-header-cell *matHeaderCellDef >
                 {{ getDay(calendarDates[0], 1) }}
               </th>
-              <td mat-cell *matCellDef="let element">
-                <office-hours-event-card
-                  [event]="element">
-                </office-hours-event-card>
+              <td mat-cell *matCellDef="let eventOH">
+                <future-office-hours-card
+                  [event]="eventOH"
+                  [shouldDisplay]="isSameDay(eventOH, 1)">
+                </future-office-hours-card>
               </td>
             </ng-container>
+
             <ng-container matColumnDef="tuesday">
               <th mat-header-cell *matHeaderCellDef>
                 {{ getDay(calendarDates[1], 2) }}
               </th>
-              <td mat-cell *matCellDef="let element">
-                <div class = "calendar-event-box">
-                  <span class="semibold">{{ element.type }}</span>
-                  <br />
-                  {{ element.location }}
-                </div>
+              <td mat-cell *matCellDef="let eventOH">
+                <future-office-hours-card
+                  [event]="eventOH"
+                  [shouldDisplay]="isSameDay(eventOH, 2)">
+                </future-office-hours-card>
               </td>
             </ng-container>
+
             <ng-container matColumnDef="wednesday">
               <th mat-header-cell *matHeaderCellDef>
                 {{ getDay(calendarDates[2], 3) }}
               </th>
-              <td mat-cell *matCellDef="let element">
-                <div class = "calendar-event-box">
-                  <span class="semibold">{{ element.type }}</span>
-                  <br />
-                  {{ element.location }}
-                </div>
+              <td mat-cell *matCellDef="let eventOH">
+                <future-office-hours-card
+                  [event]="eventOH"
+                  [shouldDisplay]="isSameDay(eventOH, 3)">
+                </future-office-hours-card>
               </td>
             </ng-container>
+
             <ng-container matColumnDef="thursday">
               <th mat-header-cell *matHeaderCellDef>
                 {{ getDay(calendarDates[3], 4) }}
               </th>
-              <td mat-cell *matCellDef="let element">
-                <div class = "calendar-event-box">
-                  <span class="semibold">{{ element.type }}</span>
-                  <br />
-                  {{ element.location }}
-                </div>
+              <td mat-cell *matCellDef="let eventOH">
+                <future-office-hours-card
+                  [event]="eventOH"
+                  [shouldDisplay]="isSameDay(eventOH, 4)">
+                </future-office-hours-card>
               </td>
             </ng-container>
+
             <ng-container matColumnDef="friday">
               <th mat-header-cell *matHeaderCellDef>
                 {{ getDay(calendarDates[4], 5) }}
               </th>
-              <td mat-cell *matCellDef="let element">
-                <div class = "calendar-event-box">
-                </div>
+              <td mat-cell *matCellDef="let eventOH">
+                <future-office-hours-card
+                  [event]="eventOH"
+                  [shouldDisplay]="isSameDay(eventOH, 5)">
+                </future-office-hours-card>
               </td>
             </ng-container>  
+            
             <tr mat-header-row *matHeaderRowDef="futureOhDisplayedColumns"></tr>
             <tr
               mat-row

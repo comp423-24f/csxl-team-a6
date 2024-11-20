@@ -20,7 +20,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CourseCardWidget } from './widgets/course-card/course-card.widget';
-import { OfficeHoursEventCardComponent } from './widgets/office-hours-event-card/office-hours-event-card.widget';
+import { FutureOfficeHoursCardWidget } from './widgets/future-office-hours-card/future-office-hours-card.widget';
 import { CatalogComponent } from './catalog/catalog.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AllCoursesComponent } from './catalog/course-catalog/course-catalog.component';
@@ -63,7 +63,7 @@ import { MatListModule } from '@angular/material/list';
     OfficeHoursEditorComponent,
     SettingsComponent,
     CourseCardWidget,
-    OfficeHoursEventCardComponent,
+    FutureOfficeHoursCardWidget,
     OfficeHourEventCardWidget,
     CalledTicketCardWidget,
     QueuedTicketCardWidget,
