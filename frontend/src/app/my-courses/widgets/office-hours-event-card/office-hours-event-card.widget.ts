@@ -34,8 +34,9 @@ export class OfficeHoursEventCardComponent {
    * Logs the current event data to the console.
    * Useful for debugging purposes.
    */
-  logElement(): void {
+  logElement() {
     console.log('Office Hours Event:', this.event);
+    return 'Office Hours Event: ' + this.event;
   }
 
   /**

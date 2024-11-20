@@ -87,6 +87,7 @@ class OfficeHoursEntity(EntityBase):
         """
         return cls(
             type=model.type,
+            hosts=model.hosts,
             mode=model.mode,
             description=model.description,
             location_description=model.location_description,
@@ -109,6 +110,7 @@ class OfficeHoursEntity(EntityBase):
         return cls(
             id=model.id,
             type=model.type,
+            hosts=model.hosts,
             mode=model.mode,
             description=model.description,
             location_description=model.location_description,
@@ -128,6 +130,7 @@ class OfficeHoursEntity(EntityBase):
         return OfficeHours(
             id=self.id,
             type=self.type,
+            hosts=self.hosts,
             mode=self.mode,
             description=self.description,
             location_description=self.location_description,
@@ -147,6 +150,7 @@ class OfficeHoursEntity(EntityBase):
         return OfficeHoursDetails(
             id=self.id,
             type=self.type,
+            hosts=self.hosts,
             mode=self.mode,
             description=self.description,
             location_description=self.location_description,
