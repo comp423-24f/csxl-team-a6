@@ -7,7 +7,7 @@
  */
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { OfficeHourEventOverview } from '../../my-courses.model';
+import { OfficeHourEventOverview } from '../../../../my-courses.model';
 
 @Component({
   selector: 'future-office-hours-card',

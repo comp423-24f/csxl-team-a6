@@ -20,7 +20,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CourseCardWidget } from './widgets/course-card/course-card.widget';
-import { FutureOfficeHoursCardWidget } from './widgets/future-office-hours-card/future-office-hours-card.widget';
+import { FutureOfficeHoursCardWidget } from './course/office-hours/widgets/future-office-hours-card/future-office-hours-card.widget';
 import { CatalogComponent } from './catalog/catalog.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AllCoursesComponent } from './catalog/course-catalog/course-catalog.component';
@@ -48,6 +48,7 @@ import { SettingsComponent } from './course/settings/settings.component';
 import { ImportRosterDialog } from './dialogs/import-roster/import-roster.dialog';
 import { OfficeHoursEditorComponent } from './course/office-hours/office-hours-editor/office-hours-editor.component';
 import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { MatListModule } from '@angular/material/list';
     MatChipsModule,
     MatInputModule,
     MatAutocompleteModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule
   ]
 })
 export class MyCoursesModule {}
