@@ -63,3 +63,4 @@ export interface OfficeHourEventOverview {
       </p>
 
 ### 5. Files that caused issue populating the hosts name from database: backend/services/academics/course_site.py, backend/api/academics/my_courses.py
+

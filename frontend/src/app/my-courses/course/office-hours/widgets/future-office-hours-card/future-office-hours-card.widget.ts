@@ -34,6 +34,11 @@ export class FutureOfficeHoursCardWidget {
   /**
    * Logs the current event data to the console.
    * Useful for debugging purposes.
+   */
+  logElement() {
+    console.log('Office Hours Event:', this.event);
+    return 'Office Hours Event: ' + this.event;
+  }
 
   /**
    * Emits the moreInfo event with the current event data.
