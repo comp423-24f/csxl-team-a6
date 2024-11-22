@@ -56,11 +56,11 @@ export interface OfficeHourEventOverview {
   - If a new developer were to want to reuse and modify our calendar/OH event features, the most important files are found in the following directories:
     - frontend/src/app/my-courses/course/office-hours/office-hours-page/
     - frontend/src/app/my-courses/widgets/office-hours-event-card/
+  - Some files that caused issue populating the hosts name from database are:
+    - backend/services/academics/course_site.py
+    - backend/api/academics/my_courses.py
       <!-- <img src="https://private-user-images.githubusercontent.com/111540555/386875741-4e5bea91-92d8-449b-aa33-8b86c1fb5141.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzE3ODkxMDgsIm5iZiI6MTczMTc4ODgwOCwicGF0aCI6Ii8xMTE1NDA1NTUvMzg2ODc1NzQxLTRlNWJlYTkxLTkyZDgtNDQ5Yi1hYTMzLThiODZjMWZiNTE0MS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMTE2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTExNlQyMDI2NDhaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04MWQ4MjQ5YjY1ZjFiMTVjNDEzZTU0Zjc3ZDUyOWExMjZmZTk3OTE3ODA0OTJhMmI0NzY1ZjdjNDg1OWE0OGY2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.nwptzkstqLIxhjSKXalAvwNy3nKH3n-J6PKo6g_0H-Q" alt="Clean Stack Diagram"> -->
       ![Clean Stack Diagram](/docs/images/clean-stack-diagram.png)
       <p style="text-align:center;">
-      <img src="/workspace/docs/images/rough-stack-diagram.jpg" alt="Rough File Stack Diagram" width="600">
+      <img src="/docs/images/rough-stack-diagram.jpg" alt="Rough File Stack Diagram" width="600">
       </p>
-
-### 5. Files that caused issue populating the hosts name from database: backend/services/academics/course_site.py, backend/api/academics/my_courses.py
-
