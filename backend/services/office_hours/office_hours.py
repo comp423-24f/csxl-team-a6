@@ -158,15 +158,13 @@ class OfficeHoursService:
         active_ticket = active_tickets[0] if len(active_tickets) > 0 else None
 
         # Find queue position
-        queue_tickets = (
-            sorted(
-                [
-                    ticket
-                    for ticket in queue_entity.tickets
-                    if ticket.state == TicketState.QUEUED
-                ],
-                key=lambda ticket: ticket.created_at,
-            ),
+        queue_tickets: list[OfficeHoursTicketEntity] = sorted(
+            [
+                ticket
+                for ticket in queue_entity.tickets
+                if ticket.state == TicketState.QUEUED
+            ],
+            key=lambda ticket: ticket.created_at,
         )
 
         queue_position = (
@@ -321,6 +319,7 @@ class OfficeHoursService:
         self._check_site_permissions(user, site_id)
 
         # Update
+        office_hours_entity.hosts = event.hosts
         office_hours_entity.type = event.type
         office_hours_entity.mode = event.mode
         office_hours_entity.description = event.description

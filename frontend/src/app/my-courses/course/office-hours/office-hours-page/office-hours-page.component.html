@@ -3,20 +3,13 @@
     <div class="header-horizontal-container">
       <mat-card-title>Office Hours</mat-card-title>
       @if(myCoursesService.courseOverview(+courseSiteId)?.role !== 'Student') {
-      <button
-        mat-flat-button
-        class="create-event-button"
-        color="primary"
-        routerLink="new/edit">
+      <button mat-flat-button class="create-event-button" color="primary" routerLink="new/edit">
         Create Event
       </button>
       }
     </div>
     <div class="header-horizontal-container low-button-toggle-density">
-      <mat-button-toggle-group
-        [(ngModel)]="viewState"
-        name="view"
-        class="view-toggle">
+      <mat-button-toggle-group [(ngModel)]="viewState" name="view" class="view-toggle">
         <mat-button-toggle [value]="ViewState.Scheduled">
           Scheduled
         </mat-button-toggle>
@@ -28,6 +21,24 @@
     </div>
     <mat-divider />
   </mat-card-header>
+  <!-- Scheduled Tab -->
+
+  <!-- We may want to include the following buttons within the additional info section of the office hours event within the calendar -->
+
+  <!-- <button mat-icon-button [routerLink]="element.id + '/edit'">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-icon-button (click)="deleteOfficeHours(element)">
+    <mat-icon>delete</mat-icon>
+  </button> -->
+
+  <!-- The following information populates date/time from backend and should be used as reference for when we add items -->
+
+  <!-- <td mat-cell *matCellDef="let element">
+    {{ element.start_time | date: 'EEEE, M/d' }}<br />
+    {{ element.start_time | date: 'shortTime' }} -
+    {{ element.end_time | date: 'shortTime' }}
+  </td> -->
   @if (viewState === ViewState.Scheduled) {
   <mat-card-content class="pane-content">
     <mat-card-subtitle>Happening Now</mat-card-subtitle>
@@ -35,9 +46,7 @@
       @if (currentOfficeHourEvents().length === 0) {
       <p>Office hours are currently closed.</p>
       } @for (event of currentOfficeHourEvents(); track event.id) {
-      <office-hour-event-card
-        [event]="event"
-        [editRoute]="event.id + '/edit'" />
+      <office-hour-event-card [event]="event" [editRoute]="event.id + '/edit'" />
       }
     </div>
     <mat-card-subtitle class="schedule-header">
@@ -46,43 +55,91 @@
     <mat-card class="schedule-card" appearance="outlined">
       <mat-card-content class="schedule-card-content">
         <div class="table-responsive">
-          <table
-            mat-table
-            [dataSource]="futureOfficeHourEventsPage()?.items ?? []">
-            <ng-container matColumnDef="date">
-              <th mat-header-cell *matHeaderCellDef>Date</th>
-              <td mat-cell *matCellDef="let element">
-                {{ element.start_time | date: 'EEEE, M/d' }}<br />
-                {{ element.start_time | date: 'shortTime' }} -
-                {{ element.end_time | date: 'shortTime' }}
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="type">
-              <th mat-header-cell *matHeaderCellDef>Type</th>
-              <td mat-cell *matCellDef="let element">
-                <span class="semibold">{{ element.type }}</span>
-                <br />
-                {{ element.location }}
-              </td>
-            </ng-container>
-              <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>Actions</th>
-                <td mat-cell *matCellDef="let element">
-                  <button mat-icon-button [routerLink]="element.id + '/edit'">
-                    <mat-icon>edit</mat-icon>
-                  </button>
-                  <button mat-icon-button (click)="deleteOfficeHours(element)">
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </td>
-              </ng-container>  
-            <tr mat-header-row *matHeaderRowDef="futureOhDisplayedColumns"></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: futureOhDisplayedColumns"></tr>
-          </table>
-          <mat-paginator
-            [length]="futureOfficeHourEventsPage()?.length ?? 0"
+          <mat-form-field appearance="outline" class="week-dropdown-container">
+            <mat-select [(ngModel)]="selectedWeek" (selectionChange)="onWeekChange($event.value)"
+              panelClass="week-dropdown">
+              <mat-select-trigger>
+                <mat-icon class="calendar-icon">calendar_today</mat-icon>
+                <span>{{ selectedWeek || 'Select Week' }}</span>
+              </mat-select-trigger>
+              @for (week of availableWeeks; track week) {
+              <mat-option [value]="week">{{ week }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <div #fiveDayCalendar>
+            <mat-grid-list cols="5" rowHeight="50px" class="calendar-dates">
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[0], 1) }}</mat-card-subtitle>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[1], 2) }}</mat-card-subtitle>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[2], 3) }}</mat-card-subtitle>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[3], 4) }}</mat-card-subtitle>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-card-subtitle>{{ getDay(calendarDates[4], 5) }}</mat-card-subtitle>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="5" rowHeight="600px" class="calendar-grid">
+              <mat-grid-tile class="weekday-tiles">
+                <div #monday class="div-tile-content">
+                  @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+                  @if (isSameDayExtreme(event, calendarDates[0])) {
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  </future-office-hours-card>
+                  }
+                  }
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile class="weekday-tiles">
+                <div #tuesday class="div-tile-content">
+                  @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+                  @if (isSameDayExtreme(event, calendarDates[1])) {
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  </future-office-hours-card>
+                  }
+                  }
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile class="weekday-tiles">
+                <div #wednesday class="div-tile-content">
+                  @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+                  @if (isSameDayExtreme(event, calendarDates[2])) {
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  </future-office-hours-card>
+                  }
+                  }
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile class="weekday-tiles">
+                <div #thursday class="div-tile-content">
+                  @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+                  @if (isSameDayExtreme(event, calendarDates[3])) {
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  </future-office-hours-card>
+                  }
+                  }
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile class="weekday-tiles">
+                <div #friday class="div-tile-content">
+                  @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
+                  @if (isSameDayExtreme(event, calendarDates[4])) {
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  </future-office-hours-card>
+                  }
+                  }
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+
+          <mat-paginator [length]="futureOfficeHourEventsPage()?.length ?? 0"
             [pageSize]="futureOfficeHourEventsPage()?.params?.page_size ?? 0"
             [pageIndex]="futureOfficeHourEventsPage()?.params?.page ?? 0"
             (page)="handleFutureOfficeHoursPageEvent($event)"></mat-paginator>
@@ -90,23 +147,23 @@
       </mat-card-content>
     </mat-card>
   </mat-card-content>
+  <!-- History Tab -->
   } @if (viewState === ViewState.History) {
   <mat-card-content class="pane-content">
     <mat-card-subtitle>History</mat-card-subtitle>
     <mat-card class="schedule-card" appearance="outlined">
       <mat-card-content class="schedule-card-content">
         <div class="table-responsive">
-          <table
-            mat-table
-            [dataSource]="pastOfficeHourEventsPage()?.items ?? []">
-            <ng-container matColumnDef="date">
+          <table mat-table [dataSource]="pastOfficeHourEventsPage()?.items ?? []">
+            <!-- Columns under Future Schedule which we will delete and replace -- NOTE THAT THIS CORRESPONDS TO HISTORY TAB NOT SCHEULED -->
+            <!-- <ng-container matColumnDef="date">
               <th mat-header-cell *matHeaderCellDef>Date</th>
               <td mat-cell *matCellDef="let element">
                 {{ element.start_time | date: 'EEEE, M/d' }}<br />
                 {{ element.start_time | date: 'shortTime' }} -
                 {{ element.end_time | date: 'shortTime' }}
               </td>
-            </ng-container>
+            </ng-container> -->
             <ng-container matColumnDef="type">
               <th mat-header-cell *matHeaderCellDef>Type</th>
               <td mat-cell *matCellDef="let element">
@@ -116,12 +173,9 @@
               </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="pastOhDisplayedColumns"></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: pastOhDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: pastOhDisplayedColumns"></tr>
           </table>
-          <mat-paginator
-            [length]="pastOfficeHourEventsPage()?.length ?? 0"
+          <mat-paginator [length]="pastOfficeHourEventsPage()?.length ?? 0"
             [pageSize]="pastOfficeHourEventsPage()?.params?.page_size ?? 0"
             [pageIndex]="pastOfficeHourEventsPage()?.params?.page ?? 0"
             (page)="handlePastOfficeHoursPageEvent($event)"></mat-paginator>

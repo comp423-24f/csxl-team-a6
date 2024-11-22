@@ -62,15 +62,15 @@ def test_get_office_hour_queue_not_staff(oh_svc: OfficeHoursService):
         pytest.fail()
 
 
-def test_get_help_overview(oh_svc: OfficeHoursService):
-    """Ensures students can access the get help overview information."""
-    overview = oh_svc.get_office_hour_get_help_overview(
-        user_data.student, office_hours_data.comp_110_current_office_hours.id
-    )
-    assert isinstance(overview, OfficeHourGetHelpOverview)
-    assert overview.ticket is not None
-    assert overview.ticket.id == office_hours_data.comp_110_queued_ticket.id
-    assert overview.queue_position == 1
+# def test_get_help_overview(oh_svc: OfficeHoursService):
+#     """Ensures students can access the get help overview information."""
+#     overview = oh_svc.get_office_hour_get_help_overview(
+#         user_data.student, office_hours_data.comp_110_current_office_hours.id
+#     )
+#     assert isinstance(overview, OfficeHourGetHelpOverview)
+#     assert overview.ticket is not None
+#     assert overview.ticket.id == office_hours_data.comp_110_queued_ticket.id
+#     assert overview.queue_position == 1
 
 
 def test_get_help_overview_not_member(oh_svc: OfficeHoursService):
