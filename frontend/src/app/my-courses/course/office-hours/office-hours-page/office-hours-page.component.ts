@@ -23,6 +23,7 @@ import {
   PaginationParams,
   Paginator
 } from 'src/app/pagination';
+import { officeHoursResolver } from '../office-hours.resolver';
 
 @Component({
   selector: 'app-course-office-hours-page',
@@ -34,9 +35,12 @@ export class OfficeHoursPageComponent {
   public static Route = {
     path: 'office-hours',
     title: 'Course',
-    component: OfficeHoursPageComponent
+    component: OfficeHoursPageComponent,
+    resolve: {
+      officeHours: officeHoursResolver
+    }
   };
-
+  public officeHours: OfficeHours;
   /** Stores the view state enum and view state. */
   ViewState = OfficeHoursPageComponent.ViewState;
   viewState = OfficeHoursPageComponent.ViewState.Scheduled;
@@ -80,6 +84,11 @@ export class OfficeHoursPageComponent {
     protected myCoursesService: MyCoursesService,
     private snackBar: MatSnackBar
   ) {
+    const data = this.route.snapshot.data as {
+      officeHours: OfficeHours;
+    };
+    this.officeHours = data.officeHours;
+    console.log(this.officeHours);
     // Load information from the parent route
     this.courseSiteId = this.route.parent!.snapshot.params['course_site_id'];
 
@@ -87,6 +96,8 @@ export class OfficeHoursPageComponent {
     this.myCoursesService
       .getCurrentOfficeHourEvents(this.courseSiteId)
       .subscribe((overview) => {
+        // Logs empty array. Kinda weird
+        // console.log('Office Hour Events API Response:', overview);
         this.currentOfficeHourEvents.set(overview);
       });
 

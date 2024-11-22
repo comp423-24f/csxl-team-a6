@@ -61,3 +61,5 @@ export interface OfficeHourEventOverview {
       <p style="text-align:center;">
       <img src="/workspace/docs/images/rough-stack-diagram.jpg" alt="Rough File Stack Diagram" width="600">
       </p>
+
+### 5. Files that caused issue populating the hosts name: backend/services/academics/course_site.py, backend/api/academics/my_courses.py

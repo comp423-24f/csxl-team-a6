@@ -422,6 +422,7 @@ class CourseSiteService:
     def _to_oh_event_overview(self, oh_event: OfficeHoursEntity) -> OfficeHoursOverview:
         return OfficeHoursOverview(
             id=oh_event.id,
+            hosts=oh_event.hosts,
             type=oh_event.type.to_string(),
             mode=oh_event.mode.to_string(),
             description=oh_event.description,
