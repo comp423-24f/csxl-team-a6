@@ -20,7 +20,6 @@ __license__ = "MIT"
 
 api = APIRouter(prefix="/api/office-hours")
 
-
 @api.get("/{id}/queue", tags=["Office Hours"])
 def get_office_hours_queue(
     id: int,
@@ -121,4 +120,6 @@ def get_office_hours(
     """
     Gets office hours.
     """
+    office_hours = oh_event_svc.get(subject, site_id, oh_id)
+    print(office_hours)
     return oh_event_svc.get(subject, site_id, oh_id)

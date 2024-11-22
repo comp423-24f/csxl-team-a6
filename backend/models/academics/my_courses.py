@@ -68,6 +68,7 @@ class OfficeHoursOverview(BaseModel):
     id: int
     type: str
     mode: str
+    hosts: str
     description: str
     location: str
     location_description: str
