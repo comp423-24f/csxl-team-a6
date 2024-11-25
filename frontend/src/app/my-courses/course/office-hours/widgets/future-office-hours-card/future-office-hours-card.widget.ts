@@ -20,6 +20,7 @@ export class FutureOfficeHoursCardWidget {
    */
   @Input() event!: OfficeHourEventOverview;
   @Input() shouldDisplay!: boolean;
+  @Input() role!: string;
 
   /**
    * Event emitted when the "More info" button is clicked.

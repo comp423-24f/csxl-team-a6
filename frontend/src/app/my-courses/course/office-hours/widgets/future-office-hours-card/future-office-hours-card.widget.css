@@ -43,3 +43,11 @@ justify-content: flex-end;
 #book-button {
     width: 81px !important;
 }
+
+#update-button {
+    width: 101px !important;
+}
+
+#delete-button {
+    width: 101px !important;
+}
