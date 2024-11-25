@@ -22,6 +22,10 @@ export class FutureOfficeHoursCardWidget {
   @Input() shouldDisplay!: boolean;
   @Input() role!: string;
 
+  @Output() deleteButtonPressed = new EventEmitter<OfficeHourEventOverview>();
+
+  constructor() {}
+
   /**
    * Event emitted when the "More info" button is clicked.
    */
