@@ -22,7 +22,7 @@
     <!-- Lacking functionality -->
     <div class="right-content-buttons">
       @if(role !== 'Student') {
-      <button id="update-button" mat-stroked-button>Update</button>
+      <button id="update-button" mat-stroked-button [routerLink]="event.id + '/edit'">Update</button>
       <button id="delete-button" class="tertiary-button" mat-flat-button (click)="deleteButtonPressed.emit(event)">Delete</button>
       }
       @else {
