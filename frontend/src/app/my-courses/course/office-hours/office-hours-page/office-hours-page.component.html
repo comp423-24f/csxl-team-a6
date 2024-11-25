@@ -49,13 +49,27 @@
       <office-hour-event-card [event]="event" [editRoute]="event.id + '/edit'" />
       }
     </div>
-    <mat-card-subtitle class="schedule-header">
-      Future Schedule
-    </mat-card-subtitle>
+    <div>
+      <mat-card-subtitle class="schedule-header">
+        Future Schedule - Week Of:
+        <mat-form-field id="new-week-selector" appearance="outline" class="week-dropdown-container">
+          <mat-select [(ngModel)]="selectedWeek" (selectionChange)="onWeekChange($event.value)"
+            panelClass="week-dropdown">
+            <mat-select-trigger>
+              <mat-icon class="calendar-icon">calendar_today</mat-icon>
+              <span>{{ selectedWeek || 'Select Week' }}</span>
+            </mat-select-trigger>
+            @for (week of availableWeeks; track week) {
+            <mat-option [value]="week">{{ week }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </mat-card-subtitle>
+    </div>
     <mat-card class="schedule-card" appearance="outlined">
       <mat-card-content class="schedule-card-content">
         <div class="table-responsive">
-          <mat-form-field appearance="outline" class="week-dropdown-container">
+          <!-- <mat-form-field appearance="outline" class="week-dropdown-container">
             <mat-select [(ngModel)]="selectedWeek" (selectionChange)="onWeekChange($event.value)"
               panelClass="week-dropdown">
               <mat-select-trigger>
@@ -66,7 +80,7 @@
               <mat-option [value]="week">{{ week }}</mat-option>
               }
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> -->
           <div #fiveDayCalendar>
             <mat-grid-list cols="5" rowHeight="50px" class="calendar-dates">
               <mat-grid-tile>
@@ -90,7 +104,8 @@
                 <div #monday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[0])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true"
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!">
                   </future-office-hours-card>
                   }
                   }
@@ -100,7 +115,8 @@
                 <div #tuesday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[1])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true"
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!">
                   </future-office-hours-card>
                   }
                   }
@@ -110,7 +126,8 @@
                 <div #wednesday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[2])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true"
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!">
                   </future-office-hours-card>
                   }
                   }
@@ -120,7 +137,8 @@
                 <div #thursday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[3])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true"
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!">
                   </future-office-hours-card>
                   }
                   }
@@ -130,7 +148,9 @@
                 <div #friday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[4])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card [event]="event" [shouldDisplay]="true"
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
+                    (deleteButtonPressed)="deleteOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
