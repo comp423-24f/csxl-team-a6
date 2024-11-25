@@ -4,7 +4,13 @@
         {{ event.type }}<br />
       </div>
       <div class="left-content">
+        @if (event.hosts.length > 0) {
         {{ event.hosts }}
+        }
+        @else {
+          <!-- {{ event.hosts }} <br /> -->
+          <br />
+        }
       </div>
       <div class="right-content">
         {{ event.location }} <br />
@@ -15,8 +21,8 @@
     <!-- <button (click)="logElement(element)">Log Element</button> -->
     <!-- Lacking functionality -->
       <div class="right-content-buttons">
-        <button mat-stroked-button>More info</button>
-        <button mat-flat-button class = "primary-button">Book</button>
+        <button id="more-info-button" mat-stroked-button>More info</button>
+        <button id="book-button" mat-flat-button class = "primary-button">Book</button>
       </div>
     </mat-card-content>
   </mat-card>
