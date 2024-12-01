@@ -1,6 +1,6 @@
 # **Office Hours Stack Flow**
 
-### 1. Refernce Image
+### 1. Reference Image
 
 ![Clean Stack Diagram](/docs/images/clean-stack-diagram.png)
 
@@ -40,7 +40,7 @@
     - api/my-courses/${courseSiteId}/oh-events/current
     - This function is aligned with the above files and calls the correct API from the database
   - NOT TO BE CONFUSED WITH getOfficeHours(
-    - /api/office-hours/${siteId}/${officeHoursId}
+    - /api/office-hours/\${siteId}/\${officeHoursId}
     - This similarly named function is called within getCurrentOfficeHourEvents( and uses backend/api/office_hours/office_hours.py and backend/services/office_hours/office_hours.py
     - ## It is a confusing layout with APIs going in different directions. This part is quite important to understand and take note of
 
