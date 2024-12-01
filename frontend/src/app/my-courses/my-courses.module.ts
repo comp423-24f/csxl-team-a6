@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CourseCardWidget } from './widgets/course-card/course-card.widget';
 import { FutureOfficeHoursCardWidget } from './course/office-hours/widgets/future-office-hours-card/future-office-hours-card.widget';
+import { MoreInfoModalWidget } from './course/office-hours/widgets/more-info-modal/more-info-modal.widget';
 import { CatalogComponent } from './catalog/catalog.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AllCoursesComponent } from './catalog/course-catalog/course-catalog.component';
@@ -65,6 +66,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     SettingsComponent,
     CourseCardWidget,
     FutureOfficeHoursCardWidget,
+    MoreInfoModalWidget,
     OfficeHourEventCardWidget,
     CalledTicketCardWidget,
     QueuedTicketCardWidget,

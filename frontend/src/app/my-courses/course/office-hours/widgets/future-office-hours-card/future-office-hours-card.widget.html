@@ -26,7 +26,7 @@
       <button id="delete-button" class="tertiary-button" mat-flat-button (click)="deleteButtonPressed.emit(event)">Delete</button>
       }
       @else {
-      <button id="more-info-button" mat-stroked-button>More info</button>
+      <button id="more-info-button" mat-stroked-button (click)="onMoreInfoClick()">More info</button>
       <button id="book-button" mat-flat-button class="primary-button">Book</button>
       }
     </div>
