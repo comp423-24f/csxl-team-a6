@@ -320,6 +320,7 @@ class OfficeHoursService:
 
         # Update
         office_hours_entity.hosts = event.hosts
+        office_hours_entity.rsvp = event.rsvp
         office_hours_entity.type = event.type
         office_hours_entity.mode = event.mode
         office_hours_entity.description = event.description

@@ -314,6 +314,11 @@ export class OfficeHoursPageComponent {
         });
     });
   }
+
+  RSVPOfficeHours(officeHours: OfficeHourEventOverview) {
+    // Todo add logic to adjust RSVP
+    // First the field must be created in database when an Office Hours Event Occurs
+  }
 }
 
 export namespace OfficeHoursPageComponent {

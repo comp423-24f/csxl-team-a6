@@ -27,7 +27,7 @@
       }
       @else {
       <button id="more-info-button" mat-stroked-button>More info</button>
-      <button id="book-button" mat-flat-button class="primary-button">Book</button>
+      <button id="book-button" mat-flat-button class="primary-button" (click)="RSVPButtonPressed.emit(event)">RSVP</button>
       }
     </div>
   </mat-card-content>

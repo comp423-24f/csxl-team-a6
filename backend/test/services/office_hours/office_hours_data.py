@@ -65,6 +65,7 @@ comp_301_sections = (
 # Office Hours
 comp_110_current_office_hours = OfficeHours(
     id=1,
+    rsvp = 0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Kris Jordan and the team",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -77,6 +78,7 @@ comp_110_current_office_hours = OfficeHours(
 )
 comp_110_future_office_hours = OfficeHours(
     id=2,
+    rsvp = 2,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Kris Jordan and the team",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -89,6 +91,7 @@ comp_110_future_office_hours = OfficeHours(
 )
 comp_110_past_office_hours = OfficeHours(
     id=3,
+    rsvp = 0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Kris Jordan and the team",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -386,6 +389,7 @@ new_site_other_user = NewCourseSite(
 
 new_event = NewOfficeHours(
     type=OfficeHoursEventType.OFFICE_HOURS,
+    rsvp = 1,
     hosts="Sample hosts (new_event)",
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Sample",
@@ -398,6 +402,7 @@ new_event = NewOfficeHours(
 
 new_event_site_not_found = NewOfficeHours(
     type=OfficeHoursEventType.OFFICE_HOURS,
+    rsvp = 5,
     hosts="Sample hosts (not_found)",
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Sample",
@@ -410,6 +415,7 @@ new_event_site_not_found = NewOfficeHours(
 
 updated_future_event = OfficeHours(
     id=2,
+    rsvp = 0,
     type=OfficeHoursEventType.REVIEW_SESSION,
     hosts="Kris Jordan and the team",
     mode=OfficeHoursEventModeType.VIRTUAL_OUR_LINK,
@@ -423,6 +429,7 @@ updated_future_event = OfficeHours(
 
 nonexistent_event = OfficeHours(
     id=404,
+    rsvp = 0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Sample hosts (nonexistent_event)",
     mode=OfficeHoursEventModeType.IN_PERSON,

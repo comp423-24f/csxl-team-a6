@@ -85,6 +85,7 @@ export class OfficeHoursEditorComponent {
   public officeHoursForm = this.formBuilder.group(
     {
       hosts: new FormControl(''),
+      rsvp: new FormControl(0),
       type: new FormControl(0, [Validators.required]),
       mode: new FormControl(0, [Validators.required]),
       description: new FormControl(''),
@@ -128,7 +129,8 @@ export class OfficeHoursEditorComponent {
         end_time: this.datePipe.transform(
           this.officeHours.end_time,
           'yyyy-MM-ddTHH:mm'
-        )
+        ),
+        rsvp: this.isNew() ? 0 : this.officeHours.rsvp
       })
     );
   }

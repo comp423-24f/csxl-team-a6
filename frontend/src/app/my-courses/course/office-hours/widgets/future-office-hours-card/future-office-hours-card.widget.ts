@@ -23,6 +23,7 @@ export class FutureOfficeHoursCardWidget {
   @Input() role!: string;
 
   @Output() deleteButtonPressed = new EventEmitter<OfficeHourEventOverview>();
+  @Output() RSVPButtonPressed = new EventEmitter<OfficeHourEventOverview>();
 
   constructor() {}
 
