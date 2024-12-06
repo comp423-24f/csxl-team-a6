@@ -78,7 +78,7 @@ comp_110_current_office_hours = OfficeHours(
 )
 comp_110_future_office_hours = OfficeHours(
     id=2,
-    rsvp=2,
+    rsvp=0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Kris Jordan and the team",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -364,6 +364,7 @@ def days_til_input(day: int):
 
 friday_oh = OfficeHours(
     id=5,
+    rsvp=0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Mr.Fri",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -377,6 +378,7 @@ friday_oh = OfficeHours(
 
 monday_oh = OfficeHours(
     id=6,
+    rsvp=0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Mr.Mond",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -390,6 +392,7 @@ monday_oh = OfficeHours(
 
 tuesday_oh = OfficeHours(
     id=7,
+    rsvp=0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Ms.Tues",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -403,6 +406,7 @@ tuesday_oh = OfficeHours(
 
 tuesday_oh_two = OfficeHours(
     id=11,
+    rsvp=0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Ina Instructor",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -416,6 +420,7 @@ tuesday_oh_two = OfficeHours(
 
 wednesday_oh = OfficeHours(
     id=8,
+    rsvp=0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Ms.Wed",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -429,6 +434,7 @@ wednesday_oh = OfficeHours(
 
 wednesday_oh_two = OfficeHours(
     id=12,
+    rsvp=0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Ian Bracken",
     mode=OfficeHoursEventModeType.IN_PERSON,
@@ -442,6 +448,7 @@ wednesday_oh_two = OfficeHours(
 
 thursday_oh = OfficeHours(
     id=9,
+    rsvp=0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Dr.Thurs",
     mode=OfficeHoursEventModeType.IN_PERSON,
