@@ -1,8 +1,16 @@
 <mat-card [class.hide]="shouldDisplay" class="surface-container-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-subtitle>{{ event.type }}</mat-card-subtitle>
+    @if(role !== 'Student') {
+      <mat-chip-set>
+        <mat-chip>{{ event.rsvp }} RSVP'd</mat-chip>
+      </mat-chip-set>
+    }
+  </mat-card-header>
   <mat-card-content class="schedule-card-content">
-    <div class="semibold-title">
+    <!-- <div class="semibold-title">
       {{ event.type }}<br />
-    </div>
+    </div> -->
     <div class="left-content">
       @if (event.hosts.length > 0) {
       {{ event.hosts }}
@@ -27,7 +35,7 @@
       }
       @else {
       <button id="more-info-button" mat-stroked-button>More info</button>
-      <button id="book-button" mat-flat-button class="primary-button" (click)="RSVPButtonPressed.emit(event)">RSVP</button>
+      <button id="rsvp-button" mat-flat-button class="primary-button" (click)="RSVPButtonPressed.emit(event)">RSVP</button>
       }
     </div>
   </mat-card-content>
