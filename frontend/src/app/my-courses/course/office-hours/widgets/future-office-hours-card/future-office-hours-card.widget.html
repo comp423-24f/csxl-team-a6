@@ -34,8 +34,8 @@
       <button id="delete-button" class="tertiary-button" mat-flat-button (click)="deleteButtonPressed.emit(event)">Delete</button>
       }
       @else {
-      <button id="more-info-button" mat-stroked-button>More info</button>
-      <button id="rsvp-button" mat-flat-button class="primary-button" (click)="RSVPButtonPressed.emit(event)">RSVP</button>
+        <button id="more-info-button" mat-stroked-button (click)="onMoreInfoClick(event)">More info</button>
+        <button id="rsvp-button" mat-flat-button class="primary-button" (click)="RSVPButtonPressed.emit(event)">RSVP</button>
       }
     </div>
   </mat-card-content>
