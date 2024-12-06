@@ -33,8 +33,9 @@ export class FutureOfficeHoursCardWidget {
    * Event emitted when the "More info" button is clicked.
    */
   // @Output() moreInfo = new EventEmitter<OfficeHourEventOverview>();
-  onMoreInfoClick(): void {
+  onMoreInfoClick(OHevent: OfficeHourEventOverview): void {
     const dialogRef = this.dialog.open(MoreInfoModalWidget, {
+      data: { event: OHevent },
       width: '1000px',
       autoFocus: false
     });

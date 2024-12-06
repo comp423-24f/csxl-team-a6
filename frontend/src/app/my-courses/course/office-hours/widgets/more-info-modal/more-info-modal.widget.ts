@@ -6,8 +6,9 @@
  * @license MIT
  */
 
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { OfficeHourEventOverview } from '../../../../my-courses.model';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'more-info-modal',
@@ -15,7 +16,12 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./more-info-modal.widget.css']
 })
 export class MoreInfoModalWidget {
-  constructor(protected dialogRef: MatDialogRef<MoreInfoModalWidget>) {}
+  // @Input() event!: OfficeHourEventOverview; - must use the injection token instead since this is a dialog not a regular component
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    protected dialogRef: MatDialogRef<MoreInfoModalWidget>
+  ) {}
 
   /** Closes the dialog */
   close(): void {
