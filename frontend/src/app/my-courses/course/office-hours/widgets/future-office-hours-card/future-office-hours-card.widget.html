@@ -1,42 +1,46 @@
-<mat-card [class.hide]="shouldDisplay" class="surface-container-card" appearance="outlined">
-  <mat-card-header>
-    <mat-card-subtitle>{{ event.type }}</mat-card-subtitle>
-    @if(role !== 'Student') {
+<div #fohcw>
+  <mat-card [class.hide]="shouldDisplay" class="surface-container-card" appearance="outlined">
+    <mat-card-header class="future-widget-header" #cardHeader>
+      <mat-card-subtitle>{{ event.type }}</mat-card-subtitle>
+      @if(role !== 'Student') {
       <mat-chip-set>
         <mat-chip>{{ event.rsvp }} RSVP'd</mat-chip>
       </mat-chip-set>
-    }
-  </mat-card-header>
-  <mat-card-content class="schedule-card-content">
-    <!-- <div class="semibold-title">
+      }
+    </mat-card-header>
+    <mat-card-content class="schedule-card-content">
+      <!-- <div class="semibold-title">
       {{ event.type }}<br />
     </div> -->
-    <div class="left-content">
-      @if (event.hosts.length > 0) {
-      {{ event.hosts }}
-      }
-      @else {
-      <!-- {{ event.hosts }} <br /> -->
-      <br />
-      }
-    </div>
-    <div class="right-content">
-      {{ event.location }} <br />
-      {{ event.start_time | date: 'shortTime' }} -
-      {{ event.end_time | date: 'shortTime' }}<br />
-    </div>
-    <!-- Useful button for testing data coming in -->
-    <!-- <button (click)="logElement(element)">Log Element</button> -->
-    <!-- Lacking functionality -->
-    <div class="right-content-buttons">
-      @if(role !== 'Student') {
-      <button id="update-button" mat-stroked-button [routerLink]="event.id + '/edit'">Update</button>
-      <button id="delete-button" class="tertiary-button" mat-flat-button (click)="deleteButtonPressed.emit(event)">Delete</button>
-      }
-      @else {
+      <div class="left-content">
+        @if (event.hosts.length > 0) {
+        {{ event.hosts }}
+        }
+        @else {
+        <!-- {{ event.hosts }} <br /> -->
+        <br />
+        }
+      </div>
+      <div class="right-content">
+        {{ event.location }} <br />
+        {{ event.start_time | date: 'shortTime' }} -
+        {{ event.end_time | date: 'shortTime' }}<br />
+      </div>
+      <!-- Useful button for testing data coming in -->
+      <!-- <button (click)="logElement(element)">Log Element</button> -->
+      <!-- Lacking functionality -->
+      <div class="right-content-buttons">
+        @if(role !== 'Student') {
+        <button id="update-button" mat-stroked-button [routerLink]="event.id + '/edit'">Update</button>
+        <button id="delete-button" class="tertiary-button" mat-flat-button
+          (click)="deleteButtonPressed.emit(event)">Delete</button>
+        }
+        @else {
         <button id="more-info-button" mat-stroked-button (click)="onMoreInfoClick(event)">More info</button>
-        <button id="rsvp-button" mat-flat-button class="primary-button" (click)="RSVPButtonPressed.emit(event)">RSVP</button>
-      }
-    </div>
-  </mat-card-content>
-</mat-card>
+        <button id="rsvp-button" mat-flat-button class="primary-button"
+          (click)="RSVPButtonPressed.emit(event)">RSVP</button>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

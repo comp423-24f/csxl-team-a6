@@ -1,6 +1,13 @@
 ::ng-deep .future-office-hours-card{
-    max-width: 300px !important;
+    /* max-width: 300px !important; */
+    max-width: 100% !important;
     margin: 0px !important;
+    display: flex !important;
+    flex: 1 1 auto;
+}
+
+#fohcw {
+    display: flex !important;
 }
 
 /* Style for the mat-card with the 'surface-container-card' class */
@@ -10,6 +17,7 @@
     margin-left: 0px !important;
     margin-top: 10px !important;
     margin-bottom: 10px !important;
+    flex: 1 1 auto !important;
 }
 
 /* Style for mat-card-content with the 'schedule-card-content' class */
@@ -50,4 +58,30 @@ justify-content: flex-end;
 
 #delete-button {
     width: 101px !important;
+}
+
+/* #cardHeader {
+    display: flex;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+} */
+
+/* #cardHeader {
+    padding-bottom: 12px;
+    display: flex;
+    /* flex-direction: column; */
+    /* flex-wrap: nowrap !important; */
+    /* justify-content: space-between !important;
+    align-items: baseline !important;
+}  */
+
+
+.future-widget-header {
+    padding-bottom: 12px;
+    display: flex;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+    flex-wrap: wrap;
+    /* margin-top: -8px !important;
+    margin-bottom: -8px !important; */
 }
