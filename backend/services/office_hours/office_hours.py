@@ -423,6 +423,10 @@ class OfficeHoursService:
         """
         # Fetch the office hours even using ORM model
         office_hours_entity = self._session.get(OfficeHoursEntity, oh_id)
+        if office_hours_entity is None:
+            raise ResourceNotFoundException(
+                "Office hours event with id: {event_id} does not exist."
+            )
         office_hours_entity.rsvp += 1
         self._session.commit()
         self._session.refresh(office_hours_entity)
