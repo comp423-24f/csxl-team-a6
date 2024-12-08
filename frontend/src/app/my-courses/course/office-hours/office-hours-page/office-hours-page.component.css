@@ -1,6 +1,6 @@
 ::ng-deep .mat-mdc-card-outlined {
     max-width: 100% !important;
-    margin-right: 32px !important;
+    margin-right: 24px !important;
   }
 
 /* #futureCard {
@@ -10,8 +10,10 @@
 .future-card {
   flex: 1 1 auto !important;
   max-width: 100% !important;
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: -6px;
+  margin-bottom: -6px;
 }
 
 .pane-content {

@@ -4,7 +4,7 @@
       <mat-card-subtitle>{{ event.type }}</mat-card-subtitle>
       @if(role !== 'Student') {
       <mat-chip-set>
-        <mat-chip>{{ event.rsvp }} RSVP'd</mat-chip>
+        <mat-chip #rsvpd>{{ event.rsvp }} RSVP'd</mat-chip>
       </mat-chip-set>
       }
     </mat-card-header>
@@ -36,7 +36,7 @@
           (click)="deleteButtonPressed.emit(event)">Delete</button>
         }
         @else {
-        <button id="more-info-button" mat-stroked-button (click)="onMoreInfoClick(event)">More info</button>
+        <button id="more-info-button" mat-stroked-button (click)="onMoreInfoClick(event)">INFO</button>
         <button id="rsvp-button" mat-flat-button class="primary-button" [disabled]="disabled"
           (click)="emitRSVPEvent()">RSVP</button>
         }

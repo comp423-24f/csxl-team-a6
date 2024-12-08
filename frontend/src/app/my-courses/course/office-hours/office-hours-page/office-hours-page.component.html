@@ -99,15 +99,14 @@
                 <mat-card-subtitle>{{ getDay(calendarDates[4], 5) }}</mat-card-subtitle>
               </mat-grid-tile>
             </mat-grid-list>
-            <mat-grid-list cols="5" rowHeight="600px" class="calendar-grid">
+            <mat-grid-list cols="5" rowHeight="800px" class="calendar-grid">
               <mat-grid-tile class="weekday-tiles">
                 <div #monday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[0])) {
                   <future-office-hours-card class="future-card" [event]="event" 
                     [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
-                    (deleteButtonPressed)="deleteOfficeHours($event)"
-                    (RSVPButtonPressed)="RSVPOfficeHours($event)">
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
@@ -119,8 +118,7 @@
                   @if (isSameDayExtreme(event, calendarDates[1])) {
                   <future-office-hours-card class="future-card" [event]="event" 
                     [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
-                    (deleteButtonPressed)="deleteOfficeHours($event)"
-                    (RSVPButtonPressed)="RSVPOfficeHours($event)">
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
@@ -132,8 +130,7 @@
                   @if (isSameDayExtreme(event, calendarDates[2])) {
                   <future-office-hours-card class="future-card" [event]="event" 
                     [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
-                    (deleteButtonPressed)="deleteOfficeHours($event)"
-                    (RSVPButtonPressed)="RSVPOfficeHours($event)">
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
@@ -145,8 +142,7 @@
                   @if (isSameDayExtreme(event, calendarDates[3])) {
                   <future-office-hours-card class="future-card" [event]="event" 
                     [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
-                    (deleteButtonPressed)="deleteOfficeHours($event)"
-                    (RSVPButtonPressed)="RSVPOfficeHours($event)">
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
@@ -158,8 +154,7 @@
                   @if (isSameDayExtreme(event, calendarDates[4])) {
                   <future-office-hours-card class="future-card" [event]="event"
                     [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
-                    (deleteButtonPressed)="deleteOfficeHours($event)"
-                    (RSVPButtonPressed)="RSVPOfficeHours($event)">
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }

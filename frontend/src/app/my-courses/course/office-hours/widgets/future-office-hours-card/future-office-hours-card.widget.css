@@ -10,6 +10,18 @@
     display: flex !important;
 }
 
+.mat-mdc-chip-set {
+    height: 24px;
+    margin-bottom: 8px;
+}
+.mat-mdc-chip {
+    height: 24px;
+}
+
+/* #rsvpd {
+    font-size: smaller !important;
+} */
+
 /* Style for the mat-card with the 'surface-container-card' class */
 .surface-container-card {
     max-width: 100% !important;
@@ -34,30 +46,31 @@ margin-top: 8px;
 /* Style for the right-aligned content */
 .right-content {
 text-align: right;
+font-size: smaller;
 }
 
 /* Style for the buttons container */
 .right-content-buttons {
-margin-top: 16px;
+margin-top: 10px;
 display: flex;
-gap: 16px;
+gap: 10px;
 justify-content: flex-end;
 }
 
 #more-info-button {
-    width: 111px !important;
+    width: 70px !important;
 }
 
 #rsvp-button {
-    width: 81px !important;
+    width: 70px !important;
 }
 
 #update-button {
-    width: 101px !important;
+    width: 70px !important;
 }
 
 #delete-button {
-    width: 101px !important;
+    width: 70px !important;
 }
 
 /* #cardHeader {
@@ -77,7 +90,7 @@ justify-content: flex-end;
 
 
 .future-widget-header {
-    padding-bottom: 12px;
+    padding-bottom: 0px;
     display: flex;
     justify-content: space-between !important;
     align-items: baseline !important;
