@@ -52,3 +52,11 @@
 - ## frontend/src/app/my-courses/course/office-hours/office-hours-page
   - frontend/src/app/my-courses/course/office-hours/office-hours-page/office-hours-page.component.html
   - frontend/src/app/my-courses/course/office-hours/office-hours-page/office-hours-page.component.ts
+
+# Example
+
+- RSVP button is clicked (`future-office-hours-card.widget.html`)
+  - Event emitter is activated in `future-office-hours-card.widget.ts`
+- The component for the entire page handles the emit (`office-hours-page.component.html`)
+  - Frontend services are called from (`office-hours-page.component.ts`)
+- `my-courses.service.ts`

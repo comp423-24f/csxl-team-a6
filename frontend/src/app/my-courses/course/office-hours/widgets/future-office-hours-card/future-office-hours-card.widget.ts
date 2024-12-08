@@ -21,11 +21,19 @@ export class FutureOfficeHoursCardWidget {
    * The office hours event data to display in the card.
    */
   @Input() event!: OfficeHourEventOverview;
-  @Input() shouldDisplay!: boolean;
   @Input() role!: string;
 
   @Output() deleteButtonPressed = new EventEmitter<OfficeHourEventOverview>();
   @Output() RSVPButtonPressed = new EventEmitter<OfficeHourEventOverview>();
+
+  disabled = false;
+
+  emitRSVPEvent() {
+    if (!this.disabled) {
+      this.RSVPButtonPressed.emit(this.event);
+      this.disabled = true;
+    }
+  }
 
   constructor(protected dialog: MatDialog) {}
 
