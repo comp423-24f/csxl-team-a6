@@ -6,6 +6,7 @@
     </mat-chip-set>
   </mat-card-header>
   <mat-card-content>
+    <p>{{ event.hosts }}</p>
     <p>
       {{ event.start_time | date: 'shortTime' }} -
       {{ event.end_time | date: 'shortTime' }}
