@@ -42,6 +42,9 @@ class OfficeHoursEntity(EntityBase):
     # Hosts of event
     hosts: Mapped[str] = mapped_column(String, default="", nullable=False)
 
+    # Event RSVP count
+    rsvp: Mapped[int] = mapped_column(Integer, nullable=False)
+
     # Mode of event
     mode: Mapped[OfficeHoursEventModeType] = mapped_column(
         SQLAlchemyEnum(OfficeHoursEventModeType), nullable=False
@@ -87,6 +90,7 @@ class OfficeHoursEntity(EntityBase):
         """
         return cls(
             type=model.type,
+            rsvp=model.rsvp,
             hosts=model.hosts,
             mode=model.mode,
             description=model.description,
@@ -110,6 +114,7 @@ class OfficeHoursEntity(EntityBase):
         return cls(
             id=model.id,
             type=model.type,
+            rsvp=model.rsvp,
             hosts=model.hosts,
             mode=model.mode,
             description=model.description,
@@ -130,6 +135,7 @@ class OfficeHoursEntity(EntityBase):
         return OfficeHours(
             id=self.id,
             type=self.type,
+            rsvp=self.rsvp,
             hosts=self.hosts,
             mode=self.mode,
             description=self.description,
@@ -149,6 +155,7 @@ class OfficeHoursEntity(EntityBase):
         """
         return OfficeHoursDetails(
             id=self.id,
+            rsvp=self.rsvp,
             type=self.type,
             hosts=self.hosts,
             mode=self.mode,

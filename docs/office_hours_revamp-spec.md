@@ -1,5 +1,12 @@
 # **Technical Specification: Office Hours Visibility Revamp**
 
+## Authors
+
+- [Christopher Sáez](https://github.com/csaez22)
+- [Michael Tyndall](https://github.com/rmt4897)
+- [Ian Bracken](https://github.com/ibracken)
+- [Ethan Byrd](https://github.com/ethanbyrd03)
+
 ### 1. Descriptions and sample data (models and API routes)
 
 - Pydantic model for an office hour event that includes the hosts input from the office hours editor form
@@ -9,35 +16,44 @@
 export interface OfficeHourEventOverview {
   id: number;
   hosts: string;
+  rsvp: number;
   type: string;
   mode: string;
   description: string;
   location: string;
   location_description: string;
   start_time: Date;
-  end_time: Date;
+  end_time: Date;V
   queued: number;
   total_tickets: number;
 }
 ```
 
+- We also added new API Route was created which exposes the new backend service function increment_rsvp()
+  - This modifies the office_hours_entity to have its rsvp feature incremented by one.
+
 ### 2. Descriptions of database/entity changes
 
-- The new column for hosts in the office hour event SQLAlchemy entity:
+- The new column for hosts and rsvp count in the office hour event SQLAlchemy entity:
 
 ```
     hosts: Mapped[str] = mapped_column(String, default="", nullable=False)
+    rsvp: Mapped[int] = mapped_column(Integer, nullable=False)
 ```
 
-- After adding this column to the entity, we add the "hosts" field in all the functions and other parts of the codebase relying on this entity
+- After adding this column to the entity, we add the "hosts" and "rsvp" fields in all the functions and other parts of the codebase relying on this entity
+
   - This change required deleting the database, re-creating the database, and adding back the demo data to the database
   - We did not want a default value as hosts should be specific to the requirements of whoever is creating the office hours.
+
+- We also added demo data in office_hours_data.py to easily populate the future office hours schedule on the deployment
 
 ### 3. Technical & UX design choices
 
 #### Technical design choice:
 
 - We decided to turn each office hour event into a widget. Initially, we built it directly into the page component, so it took some effort to move the code into a separate widget. However, we determined that this was necessary to improve readability and replicability, which will save us time in the long run since we intend to use these event widgets repeatedly.
+- We decided to move away from a booking feature for office hours and switched to RSVP functionality. The complexity of implementing a booking queue was beyond our time constraints within this sprint so we settled with an equally useful office hour RSVP feature. The RSVP feature allows instructors to gauge how many students are going to come to a future office hours session.
 
 #### User experience design choice:
 
@@ -53,14 +69,15 @@ export interface OfficeHourEventOverview {
   - There is also a typed description on the project board of the project's stack flow, which includes some other involved files
     - This is purposely a draft so that anyone on the team can add new discoveries and explanations
   - Note that there are several files other files that are involved in a minor way, so use **right-click + Go to Declaration** to see where a function or type is declared
-  - If a new developer were to want to reuse and modify our calendar/OH event features, the most important files are found in the following directories:
+  - If you to want to reuse and modify our calendar/OH event features, the most important files are found in the following directories:
     - frontend/src/app/my-courses/course/office-hours/office-hours-page/
     - frontend/src/app/my-courses/widgets/office-hours-event-card/
+    - frontend/src/app/my-courses/course/office-hours/widgets/future-office-hours-card/future-office-hours-card.widget.ts
+  - Some files that caused issue populating the hosts name from database are:
+    - backend/services/academics/course_site.py
+    - backend/api/academics/my_courses.py
       <!-- <img src="https://private-user-images.githubusercontent.com/111540555/386875741-4e5bea91-92d8-449b-aa33-8b86c1fb5141.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzE3ODkxMDgsIm5iZiI6MTczMTc4ODgwOCwicGF0aCI6Ii8xMTE1NDA1NTUvMzg2ODc1NzQxLTRlNWJlYTkxLTkyZDgtNDQ5Yi1hYTMzLThiODZjMWZiNTE0MS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMTE2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTExNlQyMDI2NDhaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04MWQ4MjQ5YjY1ZjFiMTVjNDEzZTU0Zjc3ZDUyOWExMjZmZTk3OTE3ODA0OTJhMmI0NzY1ZjdjNDg1OWE0OGY2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.nwptzkstqLIxhjSKXalAvwNy3nKH3n-J6PKo6g_0H-Q" alt="Clean Stack Diagram"> -->
       ![Clean Stack Diagram](/docs/images/clean-stack-diagram.png)
       <p style="text-align:center;">
-      <img src="/workspace/docs/images/rough-stack-diagram.jpg" alt="Rough File Stack Diagram" width="600">
+      <img src="/docs/images/rough-stack-diagram.jpg" alt="Rough File Stack Diagram" width="600">
       </p>
-
-### 5. Files that caused issue populating the hosts name from database: backend/services/academics/course_site.py, backend/api/academics/my_courses.py
-

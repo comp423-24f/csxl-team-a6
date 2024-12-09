@@ -69,6 +69,7 @@ class OfficeHoursOverview(BaseModel):
     type: str
     mode: str
     hosts: str
+    rsvp: int
     description: str
     location: str
     location_description: str

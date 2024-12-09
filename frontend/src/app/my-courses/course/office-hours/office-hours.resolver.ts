@@ -13,7 +13,6 @@ import { catchError, map, of } from 'rxjs';
 import { NewOfficeHours, OfficeHours } from '../../my-courses.model';
 import { MyCoursesService } from '../../my-courses.service';
 
-// TODO: Explore if this can be replaced by a signal.
 export const officeHoursResolver: ResolveFn<OfficeHours | undefined> = (
   route,
   _state
@@ -24,6 +23,7 @@ export const officeHoursResolver: ResolveFn<OfficeHours | undefined> = (
       id: -1,
       type: 0,
       hosts: '',
+      rsvp: 0,
       mode: 0,
       description: '',
       location_description: '',

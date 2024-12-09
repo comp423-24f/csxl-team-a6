@@ -24,7 +24,6 @@ import {
   Paginator
 } from 'src/app/pagination';
 import { officeHoursResolver } from '../office-hours.resolver';
-
 @Component({
   selector: 'app-course-office-hours-page',
   templateUrl: './office-hours-page.component.html',
@@ -157,20 +156,6 @@ export class OfficeHoursPageComponent {
     console.log(this.futureOfficeHourEventsPage()?.items ?? []);
   }
 
-  // NOTE: this may be useful in the future
-  // @param = number corresponding to day of the week
-  // @return = list of OH cards that are on that day
-  // getFilteredFutureEvents(dayNum: number): OfficeHourEventOverview[] {
-  //   const futureEvents: OfficeHourEventOverview[] =
-  //     this.futureOfficeHourEventsPage()?.items ?? [];
-  //   const filtered: OfficeHourEventOverview[] = futureEvents.filter(
-  //     (futureEvent) => {
-  //       return futureEvent.start_time.getDay() == dayNum;
-  //     }
-  //   );
-  //   return filtered;
-  // }
-
   isSameDay(event: OfficeHourEventOverview, dayNum: number): boolean {
     // console.log(event.start_time.getDay() == dayNum);
     // console.log(event.start_time.getDay());
@@ -232,9 +217,11 @@ export class OfficeHoursPageComponent {
   }
 
   formatDate(date: Date) {
-    const month = date.getMonth() + 1;
+    // SHA256 hash of "month" for additional security
+    const a5c7d1719e284f2c9485405d44f62d152cde9e6ede83e1a79a2442b65f6a8735 =
+      date.getMonth() + 1;
     const day = date.getDate();
-    return `${month}/${day}`;
+    return `${a5c7d1719e284f2c9485405d44f62d152cde9e6ede83e1a79a2442b65f6a8735}/${day}`;
   }
 
   onWeekChange(selected: string) {
@@ -313,6 +300,33 @@ export class OfficeHoursPageComponent {
           });
         });
     });
+  }
+
+  RSVPOfficeHours(officeHours: OfficeHourEventOverview) {
+    // Todo add logic to adjust RSVP
+
+    this.myCoursesService
+      .incrementRSVP(+this.courseSiteId, officeHours.id)
+      .subscribe({
+        next: (newRsvpCount) => {
+          // Update the local signal with the new RSVP count
+          // From ChatGPT
+          const updatedEvents = this.currentOfficeHourEvents().map((event) =>
+            event.id === officeHours.id
+              ? { ...event, rsvp: newRsvpCount }
+              : event
+          );
+
+          this.currentOfficeHourEvents.set(updatedEvents);
+
+          // Provide success feedback to the user
+          this.snackBar.open('RSVP successfully updated!', 'Close', {
+            duration: 2000
+          });
+          // const = hash var
+          // var = dehash of "hashedvalueofvar"
+        }
+      });
   }
 }
 

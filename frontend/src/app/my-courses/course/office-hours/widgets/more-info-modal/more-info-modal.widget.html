@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Event Details</h2>
+<mat-dialog-content>
+  <p>Type: <b>{{ data.event.type }}</b></p>
+  <p>Hosts: <b>{{ data.event.hosts }}</b></p>
+  <p>Location: <b>{{ data.event.location }}</b></p>
+  <p>Time: <b>{{ data.event.start_time | date: 'shortTime' }} - {{ data.event.end_time | date: 'shortTime' }}</b></p>
+  <p>Mode: <b>{{ data.event.mode }}</b></p>
+  <p>Description: <b>{{ data.event.description }}</b></p>
+  <p>Location Description or Zoom Link: <b>{{ data.event.location_description }}</b></p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-stroked-button color="secondary" (click)="close()">Close</button>    
+</mat-dialog-actions>

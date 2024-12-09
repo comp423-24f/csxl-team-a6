@@ -119,6 +119,15 @@ export class MyCoursesService {
       .pipe(map(parseOfficeHourEventOverviewJsonList));
   }
 
+  incrementRSVP(siteId: number, officeHoursId: number): Observable<number> {
+    return this.http
+      .post<OfficeHours>(
+        `/api/office-hours/${siteId}/${officeHoursId}/increment-rsvp`,
+        {}
+      )
+      .pipe(map((oh) => oh.rsvp));
+  }
+
   /**
    * Returns the queue for a given office hours event.
    *
