@@ -354,8 +354,8 @@ def days_til_input(day: int):
     if day > 4 or day < 0:
         raise Exception("Future OH DEMO data can only be on weekdays.")
 
-    # If its sat (5) and you're looking for next fri (4), this will produce 6 (6 = (4-5+7)%7)
-    days_til_day = (day - today.weekday() + 7) % 7
+    # If its sat (5) and you're looking for next fri (4), this will produce 6
+    days_til_day = (day + today.weekday() + 1) % 7
 
     # If its fri and you're looking for next fri, this makes sure to return 7
     if days_til_day == 0:
