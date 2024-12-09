@@ -291,6 +291,7 @@ new_site_other_user = NewCourseSite(
 )
 
 new_event = NewOfficeHours(
+    id=12,
     type=OfficeHoursEventType.OFFICE_HOURS,
     rsvp=1,
     hosts="Sample hosts (new_event)",
@@ -433,7 +434,7 @@ wednesday_oh = OfficeHours(
 )
 
 wednesday_oh_two = OfficeHours(
-    id=12,
+    id=120,
     rsvp=0,
     type=OfficeHoursEventType.OFFICE_HOURS,
     hosts="Ian Bracken",
