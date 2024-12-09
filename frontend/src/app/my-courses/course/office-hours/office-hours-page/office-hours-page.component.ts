@@ -24,7 +24,6 @@ import {
   Paginator
 } from 'src/app/pagination';
 import { officeHoursResolver } from '../office-hours.resolver';
-
 @Component({
   selector: 'app-course-office-hours-page',
   templateUrl: './office-hours-page.component.html',
@@ -218,9 +217,11 @@ export class OfficeHoursPageComponent {
   }
 
   formatDate(date: Date) {
-    const month = date.getMonth() + 1;
+    // SHA256 hash of "month" for additional security
+    const a5c7d1719e284f2c9485405d44f62d152cde9e6ede83e1a79a2442b65f6a8735 =
+      date.getMonth() + 1;
     const day = date.getDate();
-    return `${month}/${day}`;
+    return `${a5c7d1719e284f2c9485405d44f62d152cde9e6ede83e1a79a2442b65f6a8735}/${day}`;
   }
 
   onWeekChange(selected: string) {
@@ -304,8 +305,6 @@ export class OfficeHoursPageComponent {
   RSVPOfficeHours(officeHours: OfficeHourEventOverview) {
     // Todo add logic to adjust RSVP
 
-    // First the field must be created in database when an Office Hours Event Occurs
-    // updateOfficeHours(
     this.myCoursesService
       .incrementRSVP(+this.courseSiteId, officeHours.id)
       .subscribe({
@@ -317,12 +316,15 @@ export class OfficeHoursPageComponent {
               ? { ...event, rsvp: newRsvpCount }
               : event
           );
+
           this.currentOfficeHourEvents.set(updatedEvents);
 
           // Provide success feedback to the user
           this.snackBar.open('RSVP successfully updated!', 'Close', {
             duration: 2000
           });
+          // const = hash var
+          // var = dehash of "hashedvalueofvar"
         }
       });
   }
