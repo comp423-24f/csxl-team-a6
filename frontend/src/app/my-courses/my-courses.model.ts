@@ -88,6 +88,7 @@ export interface CourseRosterOverview {
 
 export interface OfficeHourEventOverviewJson {
   id: number;
+  rsvp: number;
   hosts: string;
   type: string;
   mode: string;
@@ -102,6 +103,7 @@ export interface OfficeHourEventOverviewJson {
 
 export interface OfficeHourEventOverview {
   id: number;
+  rsvp: number;
   hosts: string;
   type: string;
   mode: string;
@@ -170,6 +172,7 @@ export interface OfficeHourEventRoleOverview {
 
 export interface OfficeHourGetHelpOverviewJson {
   event_type: string;
+  event_rsvp: number;
   event_hosts: string;
   event_mode: string;
   event_start_time: string;
@@ -182,6 +185,7 @@ export interface OfficeHourGetHelpOverviewJson {
 
 export interface OfficeHourGetHelpOverview {
   event_type: string;
+  event_rsvp: number;
   event_hosts: string;
   event_mode: string;
   event_start_time: Date;
@@ -233,6 +237,7 @@ export interface CourseSite {
 
 export interface NewOfficeHoursJson {
   type: number;
+  rsvp: number;
   hosts: string;
   mode: number;
   description: string;
@@ -245,6 +250,7 @@ export interface NewOfficeHoursJson {
 
 export interface NewOfficeHours {
   type: number;
+  rsvp: number;
   hosts: string;
   mode: number;
   description: string;
@@ -258,6 +264,7 @@ export interface NewOfficeHours {
 export interface OfficeHoursJson {
   id: number;
   type: number;
+  rsvp: number;
   hosts: string;
   mode: number;
   description: string;
@@ -271,6 +278,7 @@ export interface OfficeHoursJson {
 export interface OfficeHours {
   id: number;
   type: number;
+  rsvp: number;
   hosts: string;
   mode: number;
   description: string;

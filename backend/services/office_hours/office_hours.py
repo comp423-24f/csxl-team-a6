@@ -320,6 +320,7 @@ class OfficeHoursService:
 
         # Update
         office_hours_entity.hosts = event.hosts
+        office_hours_entity.rsvp = event.rsvp
         office_hours_entity.type = event.type
         office_hours_entity.mode = event.mode
         office_hours_entity.description = event.description
@@ -403,3 +404,31 @@ class OfficeHoursService:
                 raise CoursePermissionException(
                     "Cannot modify a course page containing a section you are not an instructor for."
                 )
+    
+    def increment_rsvp(self, user: User, site_id: int, oh_id: int) -> OfficeHours:
+        """
+        Increments the RSVP count for a specific office hours event.
+
+        Args:
+            user (User): The user performing the RSVP.
+            site_id (int): The ID of the course site.
+            oh_id (int): The ID of the office hours event.
+
+        Returns:
+            OfficeHours: The updated office hours event.
+
+        Raises:
+            ValueError: If the office hours event does not exist.
+            PermissionError: If the user is not allowed to RSVP.
+        """
+        # Fetch the office hours even using ORM model
+        office_hours_entity = self._session.get(OfficeHoursEntity, oh_id)
+        if office_hours_entity is None:
+            raise ResourceNotFoundException(
+                "Office hours event with id: {event_id} does not exist."
+            )
+        office_hours_entity.rsvp += 1
+        self._session.commit()
+        self._session.refresh(office_hours_entity)
+        return office_hours_entity.to_model()
+    

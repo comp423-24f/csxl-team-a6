@@ -49,13 +49,27 @@
       <office-hour-event-card [event]="event" [editRoute]="event.id + '/edit'" />
       }
     </div>
-    <mat-card-subtitle class="schedule-header">
-      Future Schedule
-    </mat-card-subtitle>
+    <div>
+      <mat-card-subtitle class="schedule-header">
+        Future Schedule - Week Of:
+        <mat-form-field id="new-week-selector" appearance="outline" class="week-dropdown-container">
+          <mat-select [(ngModel)]="selectedWeek" (selectionChange)="onWeekChange($event.value)"
+            panelClass="week-dropdown">
+            <mat-select-trigger>
+              <mat-icon class="calendar-icon">calendar_today</mat-icon>
+              <span>{{ selectedWeek || 'Select Week' }}</span>
+            </mat-select-trigger>
+            @for (week of availableWeeks; track week) {
+            <mat-option [value]="week">{{ week }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </mat-card-subtitle>
+    </div>
     <mat-card class="schedule-card" appearance="outlined">
       <mat-card-content class="schedule-card-content">
         <div class="table-responsive">
-          <mat-form-field appearance="outline" class="week-dropdown-container">
+          <!-- <mat-form-field appearance="outline" class="week-dropdown-container">
             <mat-select [(ngModel)]="selectedWeek" (selectionChange)="onWeekChange($event.value)"
               panelClass="week-dropdown">
               <mat-select-trigger>
@@ -66,7 +80,7 @@
               <mat-option [value]="week">{{ week }}</mat-option>
               }
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> -->
           <div #fiveDayCalendar>
             <mat-grid-list cols="5" rowHeight="50px" class="calendar-dates">
               <mat-grid-tile>
@@ -85,12 +99,14 @@
                 <mat-card-subtitle>{{ getDay(calendarDates[4], 5) }}</mat-card-subtitle>
               </mat-grid-tile>
             </mat-grid-list>
-            <mat-grid-list cols="5" rowHeight="600px" class="calendar-grid">
+            <mat-grid-list cols="5" rowHeight="800px" class="calendar-grid">
               <mat-grid-tile class="weekday-tiles">
                 <div #monday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[0])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card class="future-card" [event]="event" 
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
@@ -100,7 +116,9 @@
                 <div #tuesday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[1])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card class="future-card" [event]="event" 
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
@@ -110,7 +128,9 @@
                 <div #wednesday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[2])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card class="future-card" [event]="event" 
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
@@ -120,7 +140,9 @@
                 <div #thursday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[3])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card class="future-card" [event]="event" 
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
@@ -130,7 +152,9 @@
                 <div #friday class="div-tile-content">
                   @for (event of futureOfficeHourEventsPage()?.items ?? []; track event) {
                   @if (isSameDayExtreme(event, calendarDates[4])) {
-                  <future-office-hours-card [event]="event" [shouldDisplay]="true">
+                  <future-office-hours-card class="future-card" [event]="event"
+                    [role]="myCoursesService.courseOverview(+courseSiteId)?.role!"
+                    (deleteButtonPressed)="deleteOfficeHours($event)" (RSVPButtonPressed)="RSVPOfficeHours($event)">
                   </future-office-hours-card>
                   }
                   }
@@ -156,14 +180,14 @@
         <div class="table-responsive">
           <table mat-table [dataSource]="pastOfficeHourEventsPage()?.items ?? []">
             <!-- Columns under Future Schedule which we will delete and replace -- NOTE THAT THIS CORRESPONDS TO HISTORY TAB NOT SCHEULED -->
-            <!-- <ng-container matColumnDef="date">
+            <ng-container matColumnDef="date">
               <th mat-header-cell *matHeaderCellDef>Date</th>
               <td mat-cell *matCellDef="let element">
                 {{ element.start_time | date: 'EEEE, M/d' }}<br />
                 {{ element.start_time | date: 'shortTime' }} -
                 {{ element.end_time | date: 'shortTime' }}
               </td>
-            </ng-container> -->
+            </ng-container>
             <ng-container matColumnDef="type">
               <th mat-header-cell *matHeaderCellDef>Type</th>
               <td mat-cell *matCellDef="let element">

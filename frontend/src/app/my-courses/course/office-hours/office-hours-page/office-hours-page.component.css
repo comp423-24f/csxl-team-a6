@@ -1,7 +1,20 @@
 ::ng-deep .mat-mdc-card-outlined {
     max-width: 100% !important;
-    margin-right: 32px !important;
+    margin-right: 24px !important;
   }
+
+/* #futureCard {
+  display: flex !important;
+} */
+
+.future-card {
+  flex: 1 1 auto !important;
+  max-width: 100% !important;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: -6px;
+  margin-bottom: -6px;
+}
 
 .pane-content {
     width: 100%;
@@ -41,10 +54,14 @@
 
 .schedule-card {
     margin-left: 0px !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
 .schedule-card-content {
     padding-top: 0;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
 .semibold {
@@ -78,11 +95,12 @@
 
 .week-dropdown-container {
   width: 200px;
-  display: flex;
+  /* display: flex; */
   justify-content: flex-end;
   margin-left: auto;
   margin-right: 16px;
   margin-top: 16px;
+  margin-left: 20px;
 }
 
 .calendar-icon {
@@ -111,6 +129,12 @@
 
   .calendar-grid {
     justify-content: flex-start;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .calendar-dates {
+    margin-top: 10px;
   }
 
   .weekday-tiles {
@@ -136,6 +160,7 @@
     margin: 0 !important;
     flex-wrap: wrap !important;
     align-content: flex-start !important;
+    flex: 1 1 auto !important;
   }
 
   /* .mat-grid-tile-content {
@@ -152,3 +177,8 @@
     margin: 0 !important;
     flex-wrap: nowrap !important;
 } */
+
+.table-responsive {
+  display: flex !important;
+  flex-direction: column !important;
+}

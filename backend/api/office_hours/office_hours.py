@@ -20,6 +20,7 @@ __license__ = "MIT"
 
 api = APIRouter(prefix="/api/office-hours")
 
+
 @api.get("/{id}/queue", tags=["Office Hours"])
 def get_office_hours_queue(
     id: int,
@@ -121,5 +122,23 @@ def get_office_hours(
     Gets office hours.
     """
     office_hours = oh_event_svc.get(subject, site_id, oh_id)
-    print(office_hours)
+    # print(office_hours)
     return oh_event_svc.get(subject, site_id, oh_id)
+
+
+# GPT recommended this class implementation
+@api.post("/{site_id}/{oh_id}/increment-rsvp", tags=["Office Hours"])
+def increment_rsvp(
+    site_id: int,
+    oh_id: int,
+    subject: User = Depends(registered_user),
+    oh_event_svc: OfficeHoursService = Depends(),
+) -> OfficeHours:
+    """
+    Increments the RSVP count for a specific office hours event.
+
+    Returns:
+        OfficeHours: The updated office hours event.
+    """
+    updated_office_hours = oh_event_svc.increment_rsvp(subject, site_id, oh_id)
+    return updated_office_hours

@@ -62,15 +62,15 @@ def test_get_office_hour_queue_not_staff(oh_svc: OfficeHoursService):
         pytest.fail()
 
 
-# def test_get_help_overview(oh_svc: OfficeHoursService):
-#     """Ensures students can access the get help overview information."""
-#     overview = oh_svc.get_office_hour_get_help_overview(
-#         user_data.student, office_hours_data.comp_110_current_office_hours.id
-#     )
-#     assert isinstance(overview, OfficeHourGetHelpOverview)
-#     assert overview.ticket is not None
-#     assert overview.ticket.id == office_hours_data.comp_110_queued_ticket.id
-#     assert overview.queue_position == 1
+def test_get_help_overview(oh_svc: OfficeHoursService):
+    """Ensures students can access the get help overview information."""
+    overview = oh_svc.get_office_hour_get_help_overview(
+        user_data.student, office_hours_data.comp_110_current_office_hours.id
+    )
+    assert isinstance(overview, OfficeHourGetHelpOverview)
+    assert overview.ticket is not None
+    assert overview.ticket.id == office_hours_data.comp_110_queued_ticket.id
+    assert overview.queue_position == 1
 
 
 def test_get_help_overview_not_member(oh_svc: OfficeHoursService):
@@ -142,7 +142,7 @@ def test_create_oh_event_course_not_found(oh_svc: OfficeHoursService):
 
 
 def test_create_oh_event_not_authenticated(oh_svc: OfficeHoursService):
-    """Ensures that office hour events cannot be created on sites that do not exist."""
+    """Ensures that office hour events cannot be created by unauthenticated users."""
     with pytest.raises(CoursePermissionException):
         oh_svc.create(
             user_data.root,
@@ -277,5 +277,36 @@ def test_get_oh_event_event_not_found(oh_svc: OfficeHoursService):
             user_data.root,
             office_hours_data.comp_110_site.id,
             404,
+        )
+        pytest.fail()
+
+
+def test_increment_rsvp(oh_svc: OfficeHoursService):
+    oh_event = oh_svc.get(
+        user_data.instructor,
+        office_hours_data.comp_110_site.id,
+        office_hours_data.comp_110_current_office_hours.id,
+    )
+
+    initial_rsvp = oh_event.rsvp
+
+    # Increment RSVP for the event
+    updated_event = oh_svc.increment_rsvp(
+        user_data.instructor,
+        office_hours_data.comp_110_site.id,
+        office_hours_data.comp_110_current_office_hours.id,
+    )
+
+    assert updated_event.rsvp == initial_rsvp + 1
+    assert updated_event.id == office_hours_data.comp_110_current_office_hours.id
+
+
+def test_increment_rsvp_event_not_found(oh_svc: OfficeHoursService):
+    """Ensures increment_rsvp raises an error if the office hours event does not exist."""
+    with pytest.raises(ResourceNotFoundException):
+        oh_svc.increment_rsvp(
+            user_data.root,
+            office_hours_data.comp_110_site.id,
+            404,  # Non-existent office hours ID
         )
         pytest.fail()

@@ -423,6 +423,7 @@ class CourseSiteService:
         return OfficeHoursOverview(
             id=oh_event.id,
             hosts=oh_event.hosts,
+            rsvp=oh_event.rsvp,
             type=oh_event.type.to_string(),
             mode=oh_event.mode.to_string(),
             description=oh_event.description,
