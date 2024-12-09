@@ -24,7 +24,7 @@ export interface PaginationParams extends URLSearchParams {
 
 export const DEFAULT_PAGINATION_PARAMS = {
   page: 0,
-  page_size: 25,
+  page_size: 50,
   order_by: '',
   filter: ''
 } as PaginationParams;
