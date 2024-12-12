@@ -1,7 +1,8 @@
 """Test Data for Office Hours."""
 
 import pytest
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
+import pytz
 from sqlalchemy.orm import Session
 from ...services.reset_table_id_seq import reset_table_id_seq
 
@@ -62,6 +63,14 @@ comp_301_sections = (
 )
 
 
+# Setting the correct timezone - Python's datetime library gets the timezone from the system's
+# internal data, but in the cloudapp, datetime cannot find the timezone info so it defaults
+# to UTC standard time. Using pytz, we are able to make an instance of tzinfo that can be
+# passed into datetime.now() to return the current date & time in the east coast time zone
+# which automatically accounts for daylight savings
+
+chapel_hill_timezone = pytz.timezone("America/New_York")
+
 # Office Hours
 comp_110_current_office_hours = OfficeHours(
     id=1,
@@ -71,8 +80,8 @@ comp_110_current_office_hours = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Current CAMP 110 office hours",
     location_description="In the downstairs closet : )",
-    start_time=datetime.now() - timedelta(hours=2),
-    end_time=datetime.now() + timedelta(hours=1),
+    start_time=datetime.now(chapel_hill_timezone) - timedelta(hours=2),
+    end_time=datetime.now(chapel_hill_timezone) + timedelta(hours=1),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -84,8 +93,8 @@ comp_110_future_office_hours = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Future CAMP 110 office hours",
     location_description="In the downstairs closet : )",
-    start_time=datetime.now() + timedelta(days=1),
-    end_time=datetime.now() + timedelta(days=1, hours=3),
+    start_time=datetime.now(chapel_hill_timezone) + timedelta(days=1),
+    end_time=datetime.now(chapel_hill_timezone) + timedelta(days=1, hours=3),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -97,8 +106,8 @@ comp_110_past_office_hours = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Past CAMP 110 office hours",
     location_description="In the downstairs closet : )",
-    start_time=datetime.now() - timedelta(days=1, hours=3),
-    end_time=datetime.now() - timedelta(days=1),
+    start_time=datetime.now(chapel_hill_timezone) - timedelta(days=1, hours=3),
+    end_time=datetime.now(chapel_hill_timezone) - timedelta(days=1),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -109,7 +118,7 @@ comp_110_queued_ticket = OfficeHoursTicket(
     description="My Docker container is crashing!! Pls help me I beg you..",
     type=TicketType.ASSIGNMENT_HELP,
     state=TicketState.QUEUED,
-    created_at=datetime.now(),
+    created_at=datetime.now(chapel_hill_timezone),
     called_at=None,
     closed_at=None,
     have_concerns=False,
@@ -122,7 +131,7 @@ comp_110_cancelled_ticket = OfficeHoursTicket(
     description="I don't need help, but I want to visit my friend.",
     type=TicketType.CONCEPTUAL_HELP,
     state=TicketState.CANCELED,
-    created_at=datetime.now(),
+    created_at=datetime.now(chapel_hill_timezone),
     called_at=None,
     closed_at=None,
     have_concerns=False,
@@ -135,8 +144,8 @@ comp_110_called_ticket = OfficeHoursTicket(
     description="I do not know how to exit vim. Do I need to burn my PC?",
     type=TicketType.ASSIGNMENT_HELP,
     state=TicketState.CALLED,
-    created_at=datetime.now() - timedelta(minutes=1),
-    called_at=datetime.now(),
+    created_at=datetime.now(chapel_hill_timezone) - timedelta(minutes=1),
+    called_at=datetime.now(chapel_hill_timezone),
     closed_at=None,
     have_concerns=False,
     caller_notes="",
@@ -148,9 +157,9 @@ comp_110_closed_ticket = OfficeHoursTicket(
     description="How do I turn on my computer?",
     type=TicketType.CONCEPTUAL_HELP,
     state=TicketState.CLOSED,
-    created_at=datetime.now() - timedelta(minutes=2),
-    called_at=datetime.now() - timedelta(minutes=1),
-    closed_at=datetime.now(),
+    created_at=datetime.now(chapel_hill_timezone) - timedelta(minutes=2),
+    called_at=datetime.now(chapel_hill_timezone) - timedelta(minutes=1),
+    closed_at=datetime.now(chapel_hill_timezone),
     have_concerns=True,
     caller_notes="Student could not find the power button on their laptop.",
     office_hours_id=comp_110_current_office_hours.id,
@@ -298,8 +307,8 @@ new_event = NewOfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Sample",
     location_description="Sample",
-    start_time=datetime.now(),
-    end_time=datetime.now(),
+    start_time=datetime.now(chapel_hill_timezone),
+    end_time=datetime.now(chapel_hill_timezone),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -311,8 +320,8 @@ new_event_site_not_found = NewOfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Sample",
     location_description="Sample",
-    start_time=datetime.now(),
-    end_time=datetime.now(),
+    start_time=datetime.now(chapel_hill_timezone),
+    end_time=datetime.now(chapel_hill_timezone),
     course_site_id=404,
     room_id=room_data.group_a.id,
 )
@@ -325,8 +334,8 @@ updated_future_event = OfficeHours(
     mode=OfficeHoursEventModeType.VIRTUAL_OUR_LINK,
     description="Future CAMP 110 office hours",
     location_description="In the downstairs closet : )",
-    start_time=datetime.now() + timedelta(days=1),
-    end_time=datetime.now() + timedelta(days=1, hours=3),
+    start_time=datetime.now(chapel_hill_timezone) + timedelta(days=1),
+    end_time=datetime.now(chapel_hill_timezone) + timedelta(days=1, hours=3),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -339,8 +348,8 @@ nonexistent_event = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Sample",
     location_description="Sample",
-    start_time=datetime.now(),
-    end_time=datetime.now(),
+    start_time=datetime.now(chapel_hill_timezone),
+    end_time=datetime.now(chapel_hill_timezone),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -350,12 +359,12 @@ def days_til_input(day: int):
     """
     0 is Monday and 4 is Friday
     """
-    today = datetime.today()
+    today = datetime.now(chapel_hill_timezone)
     if day > 4 or day < 0:
         raise Exception("Future OH DEMO data can only be on weekdays.")
 
     # If its sat (5) and you're looking for next fri (4), this will produce 6
-    days_til_day = (day + today.weekday() + 1) % 7
+    days_til_day = (day - today.weekday() + 7) % 7
 
     # If its fri and you're looking for next fri, this makes sure to return 7
     if days_til_day == 0:
@@ -371,8 +380,10 @@ friday_oh = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Super excellent description extreme",
     location_description="behind the building",
-    start_time=datetime.now().replace(hour=10) + days_til_input(4),  # start at 10am
-    end_time=datetime.now().replace(hour=12) + days_til_input(4),  # end at 12pm
+    start_time=datetime.now(chapel_hill_timezone).replace(hour=10)
+    + days_til_input(4),  # start at 10am
+    end_time=datetime.now(chapel_hill_timezone).replace(hour=12)
+    + days_til_input(4),  # end at 12pm
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -385,8 +396,8 @@ monday_oh = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Super excellent description extreme",
     location_description="behind the building",
-    start_time=datetime.now().replace(hour=15) + days_til_input(0),
-    end_time=datetime.now().replace(hour=16) + days_til_input(0),
+    start_time=datetime.now(chapel_hill_timezone).replace(hour=15) + days_til_input(0),
+    end_time=datetime.now(chapel_hill_timezone).replace(hour=16) + days_til_input(0),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -399,8 +410,8 @@ tuesday_oh = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Super excellent description extreme",
     location_description="behind the building",
-    start_time=datetime.now().replace(hour=9) + days_til_input(1),
-    end_time=datetime.now().replace(hour=11) + days_til_input(1),
+    start_time=datetime.now(chapel_hill_timezone).replace(hour=9) + days_til_input(1),
+    end_time=datetime.now(chapel_hill_timezone).replace(hour=11) + days_til_input(1),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -413,8 +424,8 @@ tuesday_oh_two = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Super excellent description extreme",
     location_description="behind the building",
-    start_time=datetime.now().replace(hour=10) + days_til_input(1),
-    end_time=datetime.now().replace(hour=12) + days_til_input(1),
+    start_time=datetime.now(chapel_hill_timezone).replace(hour=10) + days_til_input(1),
+    end_time=datetime.now(chapel_hill_timezone).replace(hour=12) + days_til_input(1),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -427,8 +438,8 @@ wednesday_oh = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Super excellent description extreme",
     location_description="behind the building",
-    start_time=datetime.now().replace(hour=12) + days_til_input(2),
-    end_time=datetime.now().replace(hour=13) + days_til_input(2),
+    start_time=datetime.now(chapel_hill_timezone).replace(hour=12) + days_til_input(2),
+    end_time=datetime.now(chapel_hill_timezone).replace(hour=13) + days_til_input(2),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -441,8 +452,8 @@ wednesday_oh_two = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Super excellent description extreme",
     location_description="behind the building",
-    start_time=datetime.now().replace(hour=14) + days_til_input(2),
-    end_time=datetime.now().replace(hour=15) + days_til_input(2),
+    start_time=datetime.now(chapel_hill_timezone).replace(hour=14) + days_til_input(2),
+    end_time=datetime.now(chapel_hill_timezone).replace(hour=15) + days_til_input(2),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
@@ -455,8 +466,8 @@ thursday_oh = OfficeHours(
     mode=OfficeHoursEventModeType.IN_PERSON,
     description="Super excellent description extreme",
     location_description="behind the building",
-    start_time=datetime.now().replace(hour=13) + days_til_input(3),
-    end_time=datetime.now().replace(hour=14) + days_til_input(3),
+    start_time=datetime.now(chapel_hill_timezone).replace(hour=13) + days_til_input(3),
+    end_time=datetime.now(chapel_hill_timezone).replace(hour=14) + days_til_input(3),
     course_site_id=comp_110_site.id,
     room_id=room_data.group_a.id,
 )
